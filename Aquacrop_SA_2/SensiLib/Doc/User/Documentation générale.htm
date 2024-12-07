@@ -1,0 +1,1132 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="Documentation%20générale_fichiers/filelist.xml">
+<title>LIBRAIRIE ANALYSE SENSIBILITE</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="State"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Samuel Buis</o:Author>
+  <o:LastAuthor>Samuel Buis</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>609</o:TotalTime>
+  <o:LastPrinted>2007-09-03T09:23:00Z</o:LastPrinted>
+  <o:Created>2007-09-04T09:19:00Z</o:Created>
+  <o:LastSaved>2007-09-04T09:19:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>2652</o:Words>
+  <o:Characters>14591</o:Characters>
+  <o:Company>INRA</o:Company>
+  <o:Lines>121</o:Lines>
+  <o:Paragraphs>34</o:Paragraphs>
+  <o:CharactersWithSpaces>17209</o:CharactersWithSpaces>
+  <o:Version>10.6830</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:Monospaced;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-format:other;
+	mso-font-pitch:auto;
+	mso-font-signature:3 0 0 0 1 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-weight:bold;
+	font-style:italic;}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{mso-style-noshow:yes;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.MsoFootnoteReference
+	{mso-style-noshow:yes;
+	vertical-align:super;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:332420349;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1630998750 -1714930692 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l1
+	{mso-list-id:445462468;
+	mso-list-template-ids:1256721996;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:507209506;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-922709234 792254548 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l2:level1
+	{mso-level-start-at:2;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l3
+	{mso-list-id:538398598;
+	mso-list-type:hybrid;
+	mso-list-template-ids:2131766264 521456184 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l3:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:89.25pt;
+	mso-level-number-position:left;
+	margin-left:89.25pt;
+	text-indent:-18.0pt;
+	font-family:"Courier New";}
+@list l4
+	{mso-list-id:689067370;
+	mso-list-template-ids:115799284;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l5
+	{mso-list-id:704982223;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1370829450 434170394 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l6
+	{mso-list-id:1347826252;
+	mso-list-template-ids:-1701679098;}
+@list l6:level1
+	{mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l7
+	{mso-list-id:1538546342;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1557148046 -1718176452 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l7:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l8
+	{mso-list-id:2061243677;
+	mso-list-type:hybrid;
+	mso-list-template-ids:696140958 1850231082 67895299 67895301 67895297 67895299 67895301 67895297 67895299 67895301;}
+@list l8:level1
+	{mso-level-start-at:9;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:53.25pt;
+	mso-level-number-position:left;
+	margin-left:53.25pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l8:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:89.25pt;
+	mso-level-number-position:left;
+	margin-left:89.25pt;
+	text-indent:-18.0pt;
+	font-family:"Courier New";}
+@list l8:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:125.25pt;
+	mso-level-number-position:left;
+	margin-left:125.25pt;
+	text-indent:-18.0pt;
+	font-family:Wingdings;}
+@list l9
+	{mso-list-id:2074815746;
+	mso-list-template-ids:-923483324;}
+@list l9:level1
+	{mso-level-start-at:3;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Tableau Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=FR link=blue vlink=purple style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:20.0pt'>SENSILIB<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:8.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'>Bibliothèque de fonctions pour l’analyse de
+sensibilité de modèles de simulation <o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:16.0pt'>Documentation générale<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:14.0pt'>Table des matières <o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><!--[if supportFields]><b
+style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>TOC \o &quot;1-2&quot; \n \h \z \u <span
+style='mso-element:field-separator'></span></span></b><![endif]--><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261572">Introduction</a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261573">Architecture
+de la bibliothèque</a></span></span><span style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261574">Principe
+d’utilisation</a></span></span><span style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261575">Validation
+et tests</a></span></span><span style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261576">Règles
+d’implémentation</a></span></span><span style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:right dotted 453.1pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc176261577">Documentation</a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><!--[if supportFields]><b
+style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt'><span
+style='mso-element:field-end'></span></span></b><![endif]--><b
+style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<h2><a name="_Toc176261572">Introduction</a></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>SENSILIB est une bibliothèque de
+fonctions Matlab pour l’analyse de sensibilité de modèles de simulation. Nous
+entendons ici par analyse de sensibilité l’étude des conséquences de
+perturbations sur tout ou partie des facteurs d’entrée du modèle considéré sur
+tout ou partie de ses variables de sortie. En pratique cette étude se
+caractérise par le calcul d’indices de sensibilité qui permettent d’analyser
+l’importance respective des différents facteurs d’entrée considérés pour la
+simulation de la (des) variable(s) de sortie considérée(s), de façon
+qualitative (simple hiérarchie) ou quantitative (hiérarchie avec ordre de
+grandeur des écarts). Il existe différentes classes de méthodes (méthodes de
+screening, méthodes locales, méthodes globales) dont les objectifs et les
+indices sont différents et parmi ces classes, en général, plusieurs types de
+méthodes. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Il est<b style='mso-bidi-font-weight:
+normal'> important </b>de noter que l’utilisation des fonctions de cette
+bibliothèque nécessite la connaissance des concepts de base de l’analyse de
+sensibilité, en particulier des caractéristiques de la famille à laquelle
+appartient la méthode utilisée, et la définition claire des objectifs
+poursuivis. Le lecteur pourra se référer à Saltelli et al (2000)<a
+style='mso-footnote-id:ftn1' href="#_ftn1" name="_ftnref1" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]><span
+class=MsoFootnoteReference><span style='font-size:12.0pt;font-family:"Times New Roman";
+mso-fareast-font-family:"Times New Roman";mso-ansi-language:FR;mso-fareast-language:
+FR;mso-bidi-language:AR-SA'>[1]</span></span><![endif]></span></span></a> pour
+une introduction complète à l’analyse de sensibilité.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Cette bibliothèque a été conçue
+pour fournir des outils d’analyse de sensibilité utilisables sur le modèle
+STICS en particulier via l’outil de gestion d’exécutions multiples <a
+href="../../../MultiSimLib/Doc/index.htm" target="_blank"><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></a>, mais
+avec l’objectif de rester le plus indépendant possible par rapport aux
+particularités de STICS, afin que ces outils puissent également être utilisés
+pour d’autres modèles. Le choix du langage de programmation Matlab et la
+conception modulaire des outils d’analyse de sensibilité sont les deux seules contraintes
+qui ont été imposées pour que ces outils soient applicables à STICS dans le
+contexte de <a href="../../../MultiSimLib/Doc/index.htm"><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></span></span></a>.
+Ainsi, ces outils peuvent être appliqués sur tous modèles implémentés en Matlab
+ou interfacés avec Matlab (cf. la section<span style='color:red'> <a
+href="#_Principe_d’utilisation">Principe d’utilisation</a> </span>pour plus de
+détails sur ce point). <span style='color:red'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Cette bibliothèque est
+susceptible de contenir des méthodes appartenant à n’importe quelle classe et
+leur implémentation se fera en fonction des besoins. Les <a
+href="#_Règles_d’implémentation">règles d’implémentation</a> sont définies
+ci-après. La validation de ces outils étant parfois délicate et leur
+performance étant souvent un point clé dans leur application, un jeu de modèles
+tests a été implémenté pour offrir un cadre rigoureux de validation et de
+comparaison de performance des différentes méthodes (cf. la section <a
+href="#_Validation_et_tests">Validation et tests</a>). Afin d’assurer la
+maintenance du code et la maîtrise des méthodes implémentées, parfois un peu
+technique, une <a href="#_Documentation">documentation</a> détaillée est incluse
+dans la bibliothèque. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<h2><a name="_Toc176261573">Architecture de la bibliothèque</a></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>La bibliothèque est structurée comme suit :</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:17.85pt;text-indent:17.55pt'>- <b
+style='mso-bidi-font-weight:normal'>Code</b> : le code de la bibliothèque</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:70.8pt'>- <b style='mso-bidi-font-weight:
+normal'>Demo</b> : script d’exemple d’utilisation des méthodes implémentées sur
+les modèles tests</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:17.55pt'>- <b
+style='mso-bidi-font-weight:normal'>Methods</b> : les fonctions propres aux
+différentes méthodes</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:35.7pt;text-indent:35.1pt'>- <b
+style='mso-bidi-font-weight:normal'>Models</b> : les fonctions implémentant les
+modèles tests</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:35.7pt;text-indent:35.1pt'>- <b
+style='mso-bidi-font-weight:normal'>Tools</b> : les fonctions réalisant des
+traitements génériques</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:56.25pt'><b style='mso-bidi-font-weight:
+normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal style='margin-left:18.15pt;text-indent:17.55pt'>- <b
+style='mso-bidi-font-weight:normal'>Doc</b> : la documentation de la
+bibliothèque</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:17.85pt;text-indent:17.55pt'><span
+style='mso-tab-count:1'>            </span>- <b style='mso-bidi-font-weight:
+normal'>Functions</b> : la documentation sur les fonctions générée par M2HTML </p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:17.85pt;text-indent:17.55pt'><span
+style='mso-tab-count:1'>            </span>- <b style='mso-bidi-font-weight:
+normal'>Methods</b> : les documentations propres aux différentes méthodes</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:17.85pt;text-indent:17.55pt'><span
+style='mso-tab-count:1'>            </span>- <b style='mso-bidi-font-weight:
+normal'>Models</b> : les documentations propres aux différents modèles test</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:17.85pt;text-indent:17.55pt'><span
+style='mso-tab-count:1'>            </span>- <b style='mso-bidi-font-weight:
+normal'>User</b> : la documentation générale de la bibliothèque</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h2><o:p>&nbsp;</o:p></h2>
+
+<h2><a name="_Toc176261574"></a><a name="_Ref176261010"></a><a
+name="_Principe_d’utilisation"></a><span style='mso-bookmark:_Toc176261574'><span
+style='mso-bookmark:_Ref176261010'>Principe d’utilisation</span></span></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Le principe d’une analyse de
+sensibilité est de faire varier une sélection des facteurs d’entrée du modèle
+étudié et de calculer l’impact de ces variations sur une sélection de ses
+sorties sous la forme d’un ou plusieurs types d’indices de sensibilité. Bien
+que cette solution ne soit pas la plus économe en temps de calcul et en
+mémoire, nous avons choisi de séparer ce processus en deux étapes, c'est-à-dire,
+pour chaque méthode, il existe deux types de fonctions&nbsp;:</p>
+
+<p class=MsoNormal style='text-align:justify'><span style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b style='mso-bidi-font-weight:normal'><i
+style='mso-bidi-font-style:normal'>F_gen_variant_****</i></b>&nbsp;: qui génère
+l’échantillon de valeurs des facteurs d’entrée sur lesquels le modèle doit être
+appliqué&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'><span
+style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b style='mso-bidi-font-weight:normal'><i
+style='mso-bidi-font-style:normal'>F_sensi_analysis_****</i></b>&nbsp;: qui
+calcule les indices de sensibilité à partir des valeurs des sorties du modèles.</p>
+
+<p class=MsoNormal style='text-align:justify'><span style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'>où <b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'>****</i></b> est le nom de la
+méthode d’analyse de sensibilité.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Cette architecture sera commune à
+l’ensemble des méthodes implémentées dans la bibliothèque. Elle a l’avantage
+d’être modulaire, et donc d’être facilement applicable quelquesoit le modèle
+utilisé.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;mso-layout-grid-align:none;
+text-autospace:none'>Les arguments <i style='mso-bidi-font-style:normal'><span
+style='font-size:10.0pt;font-family:Monospaced;mso-bidi-font-family:Monospaced;
+color:black'>v_in_mat</span></i> en sortie de <b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'>F_gen_variant_****</i></b> et <i
+style='mso-bidi-font-style:normal'><span style='font-size:10.0pt;font-family:
+Monospaced;mso-bidi-font-family:Monospaced;color:black'>v_out_mat</span></i> en
+entrée de <b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'>F_sensi_analysis_****</i></b>&nbsp; sont donc commun à l’ensemble de
+ces fonctions&nbsp;: </p>
+
+<p class=MsoNormal style='text-align:justify;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:
+none;text-autospace:none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><i style='mso-bidi-font-style:normal'><span
+style='font-size:10.0pt;font-family:Monospaced;mso-bidi-font-family:Monospaced;
+color:black'>v_in_mat</span></i> représente la matrice des variants sur
+lesquels appliquer le modèle, i.e. l’échantillon des valeurs des différents
+facteurs d’entrée du modèle que l’utilisateur souhaite considérer pour
+l’analyse de sensibilité, avec en ligne les différents jeux de valeurs générés
+par la méthode, et en colonne les différents paramètres.</p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify;mso-layout-grid-align:
+none;text-autospace:none'><span style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:
+none;text-autospace:none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><i style='mso-bidi-font-style:normal'><span
+style='font-size:10.0pt;font-family:Monospaced;mso-bidi-font-family:Monospaced;
+color:black'>v_out_mat</span></i> représente la matrice des sorties du modèle
+obtenues à partir de la matrice des variant, avec en ligne les différents jeux
+de valeurs, et en colonne les différentes sorties du modèle que l’utilisateur
+souhaite analyser.<span style='font-family:Monospaced'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Pour pouvoir utiliser ces
+fonctions pour un modèle particulier, il est donc nécessaire de pouvoir
+appliquer le modèle sur les différents jeux de valeurs des paramètres fournis
+dans la matrice <i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt;font-family:Monospaced;mso-bidi-font-family:Monospaced;color:black'>v_in_mat</span></i>,
+et de pouvoir copier les valeurs correspondantes des sorties du modèle que
+l’utilisateur souhaite analyser dans la matrice <i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Monospaced;mso-bidi-font-family:
+Monospaced;color:black'>v_out_mat</span></i>.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Ces fonctions ont bien sûr
+d’autres arguments qui dépendent de la méthode implémentée. Ces arguments sont
+largement commentés en entête des fonctions, et nous invitons le lecteur
+intéressé à se référer à la section de <a href="../Functions/index.html">documentation
+sur les fonctions</a><span style='color:red'> </span>pour une description
+détaillée de ces arguments pour chacune des méthodes.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Le script <a
+href="../Functions/Demo/progtest.html">progtest.m</a> donne un exemple
+d’utilisation de ces fonctions pour les modèles tests implémentés. Pour une
+utilisation sur le modèle STICS, reportez-vous à la documentation de la
+bibliothèque<span style='color:red'> </span><a
+href="../../../MultiSimLib/Doc/index.htm"><span style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></span></span></a>.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;mso-layout-grid-align:none;
+text-autospace:none'>Afin de pouvoir utiliser toutes les fonctions (méthodes,
+modèles, …) fournies dans la bibliothèque SensiLib, il est nécessaire d’inclure
+les répertoires contenant ces fonctions au «&nbsp;Matlab search path&nbsp;», </p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>soit via le menu Matlab <i style='mso-bidi-font-style:
+normal'>File</i><i style='mso-bidi-font-style:normal'><span style='font-family:
+Wingdings;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Wingdings'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Wingdings'>à</span></span>set path …</i>&nbsp;, </p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>soit avec l’instruction Matlab <i style='mso-bidi-font-style:
+normal'><span style='color:black'>addpath(‘répertoire’);</span><o:p></o:p></i></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'>Les
+répertoires à inclure sont&nbsp;: </p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Code\Methods</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Code\Demos</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Code\Tools</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-indent:-18.0pt;mso-list:
+l3 level1 lfo5;tab-stops:list 53.25pt;mso-layout-grid-align:none;text-autospace:
+none'><![if !supportLists]><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Code\Models<o:p></o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='font-family:Monospaced'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'>La liste des méthodes
+implémentées ainsi que les fonctions et documentations associées est fournie <a
+href="../Methods/index.htm">ici</a>. </p>
+
+<p class=MsoNormal style='text-align:justify'>La liste des modèles tests
+implémentés ainsi que les fonctions et documentations associées est fournie <a
+href="../Models/index.htm">ici</a>. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<h2><a name="_Toc176261575"></a><a name="_Validation_et_tests"></a><span
+style='mso-bookmark:_Toc176261575'>Validation et tests</span></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>La validation de l’implémentation
+des méthodes d’analyse de sensibilité est bien sûre très importante, en
+particulier car les indices de sensibilité obtenus sur un modèle sont en pratique
+difficilement vérifiables et pas toujours facilement explicables. Par ailleurs,
+pour les méthodes dites globales, il convient de vérifier non seulement que les
+résultats de la méthode convergent vers une valeur exacte, mais également que
+la vitesse de convergence est correcte, ce qui peut être plus délicat. <span
+style='mso-spacerun:yes'> </span></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>La performance des méthodes en
+terme de nombre de simulation du modèle à réaliser pour obtenir une précision
+acceptable pour l’utilisateur sur les indices de sensibilité est souvent un
+aspect important dans le choix de la méthode car celui-ci peut varier de
+l’ordre de la centaine à l’ordre de la dizaine à centaine de milliers et
+certaines méthodes peuvent donc se révéler extrêmement coûteuse en temps de
+calcul selon le temps d’exécution du modèle. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Un jeu de modèles tests classiquement
+utilisés dans la littérature et dont les indices de sensibilité sont connus ou
+calculables analytiquement a été implémenté pour offrir un cadre rigoureux de
+validation et de test de performance des méthodes. La liste de ces modèles et
+leur documentation est donnée <a href="../Models/index.htm">ici</a>. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Concernant la validation on a
+essayé, et on essaiera, quand cela est possible, de vérifier les fonctions de
+génération des variants en traçant, par exemple pour les méthodes globales, les
+nuages de points résultants et en les comparant avec ceux trouvés dans la
+littérature et en traçant les distributions de valeurs pour chaque paramètre. L’ensemble
+de la méthode peut ensuite être vérifiée sur les modèles tests. On s’assure que
+les valeurs des indices calculés, pour une grande taille d’échantillon pour les
+méthodes globales, convergent bien vers les valeurs théoriques des indices pour
+les différents modèles. On essaie également de comparer les vitesses de
+convergence obtenue avec celles trouvées dans la littérature pour des modèles
+et conditions d’utilisation identiques. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Le jeu de modèle test permet aussi
+de tester l’influence des éventuels paramètres des méthodes sur les résultats
+et de comparer les performances des méthodes, c'est-à-dire la précision obtenue
+sur les indices pour un nombre de simulation équivalent. </p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Tous les résultats de validation
+et de tests qui ont été obtenus sont rassemblés dans des documents propres à
+chaque méthode (cf. la section<span style='color:red'> <a href="#_Documentation">documentation</a></span>).
+<span style='mso-spacerun:yes'> </span></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<h2><a name="_Toc176261576"></a><a name="_Règles_d’implémentation"></a><span
+style='mso-bookmark:_Toc176261576'>Règles d’implémentation</span></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Ces règles ont été pour la
+plupart tirées de celles décrites dans la bibliothèque <a
+href="../../../MultiSimLib/Doc/index.htm"><span style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></span></span></a>.
+</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Règles d’implémentation concernant
+les fonctions&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>une seule fonction par fichier, le fichier porte le
+même nom que la fonction ;</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>convention de nommage des fonctions&nbsp;: <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>F_xxxx_yyyy</i></b>&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>les fonctions peuvent être de trois types&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>fonction propre à une méthode <span
+style='font-family:Wingdings;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Wingdings'><span style='mso-char-type:symbol;mso-symbol-font-family:Wingdings'>à</span></span>
+dans le répertoire Code/Methodes&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>fonction ayant un caractère générique <span
+style='font-family:Wingdings;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Wingdings'><span style='mso-char-type:symbol;mso-symbol-font-family:Wingdings'>à</span></span>
+dans le répertoire Code/Outils&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>fonction propre à un modèle tests <span
+style='font-family:Wingdings;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Wingdings'><span style='mso-char-type:symbol;mso-symbol-font-family:Wingdings'>à</span></span>
+dans le répertoire Code/Modeles.</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify'>La seule
+exception à cette règle est le programme progtest.m qui permet de tester les
+méthodes sur les modèles tests (ce programme se trouve dans le répertoire
+Code).</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>les fonctions qui fournissent les variants et calculent
+les indices pour une méthode donnée doivent s’appeler&nbsp;respectivement <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>F_gen_variant_***</i></b>
+et <b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>F_sensi_analysis_***</i></b>,
+où *** est le nom de la méthode&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>toutes les fonctions générées pour SensiLib sont
+construites autour d'un format standard proposant une entête de description des
+éléments clés de la fonction: arguments en entrée, en sortie, description
+courte, description longue, méthode d'appel, fonctions appelées. Cf. la section<span
+style='color:red'> <a href="#_Documentation">Documentation</a> </span>ci-après
+pour plus de détails.<o:p></o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Règles d’implémentation
+concernant les variables&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>convention de nommage des variables : <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>v_xxx_yyy</i></b>&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>éviter autant que possible l’utilisation de variables
+globales&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:53.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level1 lfo5;tab-stops:list 53.25pt'><![if !supportLists]><span
+style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>les variables contenant les variants et les sorties du
+modèle doivent s’appeler&nbsp;respectivement <b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'>v_in_mat</i></b> et <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>v_out_mat</i></b>
+et être des matrices de taille (nombre de simulation, nombre de facteurs
+variants) et (nombre de simulation, nombre de variables de sorties à analyser)</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Bien sûr, à tout développement
+doit être associé une documentation. Cf. la section <a href="#_Documentation">Documentation</a>
+ci-après concernant les règles à respecter pour documenter les développements.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<h2><a name="_Ref176600977"></a><a name="_Toc176261577"></a><a
+name="_Documentation"></a><span style='mso-bookmark:_Ref176600977'><span
+style='mso-bookmark:_Toc176261577'>Documentation</span></span></h2>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Plusieurs types de documentation
+existent dans SensiLib&nbsp;en plus de celle-ci.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><u><a href="../Models/index.htm">La
+documentation sur les modèles tests&nbsp;</a>:<o:p></o:p></u></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Pour chaque
+modèle test, un document décrit au minimum la ou les équations du modèle, sa
+source et les valeurs des indices de sensibilité associés. &nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><u><a href="../Methods/index.htm">La
+documentation sur les méthodes d’analyse de sensibilité</a> :<o:p></o:p></u></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Pour chaque
+méthode, un document doit donner au moins les éléments suivants&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>comment se situe la méthode par rapport aux
+autres (famille de la méthode, avantages, inconvénients, performances)&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>comment calculer les indices (en particulier
+tous les éléments qui ont été nécessaires pour l’implémentation de la méthode).</p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Le tout en
+citant toutes les sources d’où sont tirés ces éléments.</p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Pour chaque
+méthode, un document d’implémentation/validation/tests doit également être
+rédigé. Ce document doit au minimum contenir les informations suivantes&nbsp;: </p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>architecture de l’implémentation de la méthode
+(noms de toutes les fonctions et description rapide de ce qu’elles réalisent)&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>éléments de validation et de test de
+l’implémentation (cf. section<span style='color:red'> <a
+href="#_Validation_et_tests">Validation et tests</a> </span>de ce document)&nbsp;;</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><u><a
+href="../Functions/index.html">La documentation dans les fonctions&nbsp;</a>:<o:p></o:p></u></p>
+
+<p class=MsoNormal style='margin-left:35.4pt;text-align:justify'>Cette partie
+de documentation est particulièrement importante à la fois pour l’utilisateur et
+le développeur. C’est elle qui décrit à la fois ce que fait la fonction,
+comment l’utiliser et comment elle est implémentée. </p>
+
+<p class=MsoNormal style='margin-left:35.4pt;text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Comme dans <a
+href="../../../MultiSimLib/Doc/index.htm"><span style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></span></span></a>,
+Chaque fonction doit contenir une entête standard de documentation qui donne
+les éléments suivants&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>but de la fonction&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>description des arguments d’entrée et de sortie
+(signification, type, format)&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>description du contenu de la fonction&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>fonctions appelées&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>nom du ou des auteurs&nbsp;;</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New"'><span
+style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>date de création ;</p>
+
+<p class=MsoNormal style='margin-left:35.4pt;text-align:justify'>Un template de
+cette entête peut être obtenu avec la fonction <a
+href="../Functions/Tools/F_sl_new_func.html">Code\Functions\Tools\F_sl_new_func.html</a>&nbsp;tirée
+de <a href="../../../MultiSimLib/Doc/index.htm"><span style='mso-field-code:
+" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><span
+style='color:windowtext;text-decoration:none;text-underline:none'><span
+style='mso-field-code:"HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 \\t \0022_blank\0022"'><span
+style='mso-field-code:" HYPERLINK \0022\.\.\/\.\.\/\.\.\/MultiSimLib\/Doc\/index\.htm\0022 "'><u><span
+style='color:blue'>MultiSimLib</span></u></span></span></span></span></a> :</p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New";
+color:black'><span style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='color:black'>F_sl_new_func():
+création du template générique dans un éditeur&nbsp;;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New";
+color:black'><span style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>F_sl_new_func('read_config'): idem avec nom de
+la fonction&nbsp;;<span style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New";
+color:black'><span style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>F_sl_new_func('read_config',1): idem avec
+création du fichier (répertoire courant)&nbsp;;<span style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:89.25pt;text-align:justify;text-indent:
+-18.0pt;mso-list:l3 level2 lfo5;tab-stops:list 89.25pt'><![if !supportLists]><span
+style='font-family:"Courier New";mso-fareast-font-family:"Courier New";
+color:black'><span style='mso-list:Ignore'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]>F_sl_new_func('read_Config','my_Path'): idem
+dans un répertoire de son choix.<span style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:35.4pt;text-align:justify'>L’intérêt de
+ce formattage, outre de donner une certaine homogénéité aux commentaires, est
+que l'outil M2HTML, utilise ces entêtes des fichiers fonctions pour créer des
+pages HTML à partir du code matlab, en présentant les informations sous forme
+didactique. La documentation utilisateur et développeur est ainsi créé
+automatiquement, et propose une page d'index à travers laquelle on peut
+parcourir les répertoires de stockages des fonctions, et accéder aux
+descriptions et au code de ces dernières. C’est la fonction <a
+href="../Functions/Tools/F_gen_doc_functions.html">Code\Functions\Tools\F_gen_doc_functions.m</a>
+qui permet de générer automatiquement cette documentation. </p>
+
+<p class=MsoNormal style='margin-left:35.4pt;text-align:justify'><span
+style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'>Par ailleurs,
+les différentes étapes de la fonction, les astuces de codage ou autres passages
+un peu complexes doivent être commentés dans le corps de la fonction. Ces
+commentaires peuvent s’appuyer sur les autres documents, en particulier pour
+les fonctions relatives aux méthodes d’analyse de sensibilité, au document de
+description de la méthode implémentée. </p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:35.25pt;text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'>Tous ces documents se trouvent
+dans le répertoire Documents, et sont accessibles en cliquant <a
+href="../index.htm">ici</a>.<o:p></o:p></p>
+
+</div>
+
+<div style='mso-element:footnote-list'><![if !supportFootnotes]><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<![endif]>
+
+<div style='mso-element:footnote' id=ftn1>
+
+<p class=MsoFootnoteText><a style='mso-footnote-id:ftn1' href="#_ftnref1"
+name="_ftn1" title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]><span class=MsoFootnoteReference><span
+style='font-size:10.0pt;font-family:"Times New Roman";mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:FR;mso-fareast-language:FR;mso-bidi-language:
+AR-SA'>[1]</span></span><![endif]></span></span></a><span lang=EN-GB
+style='mso-ansi-language:EN-GB'> Saltelli, A. and Chan, K. and Scott, M. (Eds)
+(2000) <i style='mso-bidi-font-style:normal'>Sensitivity Analysis</i>. John
+Wiley &amp; Sons, Ltd, </span><st1:State><st1:place><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>New York</span></st1:place></st1:State><span
+lang=EN-GB style='mso-ansi-language:EN-GB'>.<o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_indices_g_function</title>
+  <meta name="keywords" content="F_indices_g_function">
+  <meta name="description" content="Indices de sensibilite theoriques de la fonction g de Sobol'">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Models -->
+<h1>F_indices_g_function
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Indices de sensibilite theoriques de la fonction g de Sobol'</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function[v_indlist,v_S,v_ST]=F_indices_g_function(v_a) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Indices de sensibilite theoriques de la fonction g de Sobol'
+
+ Fonction de calcul des valeurs theoriques des
+ indices de sensibilite de la fonction g de Sobol'.
+  
+   ENTREE(S): descriptif des arguments d'entree
+      - v_a : 
+         vecteur de type reel de taille (nombre de parametres x)
+         contenant les valeurs des parametres ai qui definissent la
+         fonction g. 
+  
+
+   SORTIE(S): descriptif des arguments de sortie
+      - v_indlist : 
+         vecteur de type entier, de taille le nombre total d'indices de 
+         sensibilite (a tous les ordres, mais sans les indices totaux), 
+         contenant le nom des indices donnes dans v_S (i correspond a 
+         l'indice principal Si, ij e l'indice de second d'ordre Sij, ...) 
+
+      - v_S : 
+         vecteur de type reel, de taille le nombre total d'indices de
+         sensibilite (a tous les ordres, mais sans les indices totaux),
+         contenant la valeurs des indices de sensibilite de la fonction g  
+         a tous les ordres. 
+         Pour avoir l'indice principal Si, utiliser v_S(find(v_indlist==i)).
+         Pour avoir l'indice d'ordre 2 Sij, utiliser v_S(find(v_indlist==ij))
+
+      - v_ST : 
+         vecteur de type reel, de taille le nombre de parametres xi 
+         de la fonction g, contenant la valeurs des indices de sensibilite 
+         totaux de la fonction g. 
+
+
+   APPEL(S): liste des fonctions appelees
+      - F_creer_matrice, F_ecrit_indice
+  
+  
+  AUTEUR(S): S. Buis
+  DATE: 31-Aug-2007
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+ Voir aussi F_gen_matindice_vs, F_ecrit_indice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="../Tools/F_gen_matindex_vs.html" class="code" title="function v_M = F_gen_matindex_vs(v_p)">F_gen_matindex_vs</a>	Association entre l'ordre des indices v_S et numero des facteurs impliques</li><li><a href="../Tools/F_write_index.html" class="code" title="function [v_cat]=F_write_index(v_vect)">F_write_index</a>	Concatene un vecteur d'entiers en un entier</li></ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function[v_indlist,v_S,v_ST]=F_indices_g_function(v_a)</a>
+0002 <span class="comment">% Indices de sensibilite theoriques de la fonction g de Sobol'</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Fonction de calcul des valeurs theoriques des</span>
+0005 <span class="comment">% indices de sensibilite de la fonction g de Sobol'.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   ENTREE(S): descriptif des arguments d'entree</span>
+0008 <span class="comment">%      - v_a :</span>
+0009 <span class="comment">%         vecteur de type reel de taille (nombre de parametres x)</span>
+0010 <span class="comment">%         contenant les valeurs des parametres ai qui definissent la</span>
+0011 <span class="comment">%         fonction g.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   SORTIE(S): descriptif des arguments de sortie</span>
+0015 <span class="comment">%      - v_indlist :</span>
+0016 <span class="comment">%         vecteur de type entier, de taille le nombre total d'indices de</span>
+0017 <span class="comment">%         sensibilite (a tous les ordres, mais sans les indices totaux),</span>
+0018 <span class="comment">%         contenant le nom des indices donnes dans v_S (i correspond a</span>
+0019 <span class="comment">%         l'indice principal Si, ij e l'indice de second d'ordre Sij, ...)</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%      - v_S :</span>
+0022 <span class="comment">%         vecteur de type reel, de taille le nombre total d'indices de</span>
+0023 <span class="comment">%         sensibilite (a tous les ordres, mais sans les indices totaux),</span>
+0024 <span class="comment">%         contenant la valeurs des indices de sensibilite de la fonction g</span>
+0025 <span class="comment">%         a tous les ordres.</span>
+0026 <span class="comment">%         Pour avoir l'indice principal Si, utiliser v_S(find(v_indlist==i)).</span>
+0027 <span class="comment">%         Pour avoir l'indice d'ordre 2 Sij, utiliser v_S(find(v_indlist==ij))</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%      - v_ST :</span>
+0030 <span class="comment">%         vecteur de type reel, de taille le nombre de parametres xi</span>
+0031 <span class="comment">%         de la fonction g, contenant la valeurs des indices de sensibilite</span>
+0032 <span class="comment">%         totaux de la fonction g.</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   APPEL(S): liste des fonctions appelees</span>
+0036 <span class="comment">%      - F_creer_matrice, F_ecrit_indice</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%  AUTEUR(S): S. Buis</span>
+0040 <span class="comment">%  DATE: 31-Aug-2007</span>
+0041 <span class="comment">%  VERSION: 0</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0044 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0045 <span class="comment">%    $Author: plecharpent $</span>
+0046 <span class="comment">%    $Revision: 40 $</span>
+0047 <span class="comment">%</span>
+0048 <span class="comment">%</span>
+0049 <span class="comment">% See also F_gen_matindice_vs, F_ecrit_indice</span>
+0050 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0051 
+0052 <span class="comment">% Calcul du nombre de parametres et initialisation diverses</span>
+0053 v_nb_par=length(v_a);
+0054 v_S=[];
+0055 v_ST=zeros(v_nb_par,1);
+0056 
+0057 <span class="comment">% Calcul de la variance totale D.</span>
+0058 v_Dtemp=1.;
+0059 <span class="keyword">for</span> i=1:v_nb_par
+0060     v_Di(i)=1/(3*(1+v_a(i))^2);
+0061     v_Dtemp=v_Dtemp*(1+v_Di(i));
+0062 <span class="keyword">end</span>
+0063 v_D=v_Dtemp-1;
+0064 
+0065 <span class="comment">% Creation de la matrice pour definir l'ordre de calcul des indices</span>
+0066 <span class="comment">% principaux</span>
+0067 [v_M]=<a href="../Tools/F_gen_matindex_vs.html" class="code" title="function v_M = F_gen_matindex_vs(v_p)">F_gen_matindex_vs</a>(v_nb_par);
+0068 
+0069 <span class="comment">% Calcul du nombre total d'indices principaux</span>
+0070 v_nb_main_indices=0;
+0071 <span class="keyword">for</span> i=1:v_nb_par
+0072     v_nb_main_indices=v_nb_main_indices+nchoosek(v_nb_par,i);
+0073 <span class="keyword">end</span>
+0074 <span class="keyword">if</span> ((size(v_M,1)-1)~=v_nb_main_indices) 
+0075         error(<span class="string">'Erreur dans le nombre d''indices principaux.'</span>);
+0076 <span class="keyword">end</span>
+0077 
+0078 
+0079 <span class="comment">% Calcul des indices principaux et totaux</span>
+0080 v_indcount=1;
+0081 <span class="comment">%   Boucle sur les indices principaux de tous les ordres</span>
+0082 <span class="keyword">for</span> i=2:size(v_M,1)
+0083     <span class="comment">%ex: pour la ligne 0101 de M, k=[2 4]</span>
+0084     v_k=[];
+0085     v_k=find(v_M(i,:));
+0086      
+0087     <span class="keyword">if</span> length(v_k)==1 
+0088        <span class="comment">% calcul de l'indice principal de 1er ordre du facteur k</span>
+0089        v_indlist(v_indcount)=v_k;
+0090        v_S(v_indcount)=v_Di(v_k)/v_D;
+0091 
+0092     <span class="keyword">else</span>
+0093        <span class="comment">% calcul de l'indice principal d'ordre length(k) concernant les</span>
+0094        <span class="comment">% facteurs listes dans k.</span>
+0095         
+0096        ll=<a href="../Tools/F_write_index.html" class="code" title="function [v_cat]=F_write_index(v_vect)">F_write_index</a>(v_k);
+0097        v_indlist(v_indcount)=ll;
+0098 
+0099        v_S(v_indcount)=1;
+0100        <span class="keyword">for</span> l=1:length(v_k)
+0101           v_S(v_indcount)=v_S(v_indcount)*v_Di(v_k(l));
+0102        <span class="keyword">end</span>
+0103        v_S(v_indcount)=v_S(v_indcount)/v_D;
+0104        
+0105     <span class="keyword">end</span>
+0106 
+0107     <span class="comment">% Ajout de l'indice calcule dans tous les indices totaux dans lesquels</span>
+0108     <span class="comment">% il est implique</span>
+0109     <span class="keyword">for</span> l=1:length(v_k)
+0110        v_ST(v_k(l))=v_ST(v_k(l))+v_S(v_indcount);
+0111     <span class="keyword">end</span>
+0112 
+0113     v_indcount=v_indcount+1;
+0114 
+0115 <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

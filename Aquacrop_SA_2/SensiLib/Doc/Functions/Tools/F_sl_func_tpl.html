@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_sl_func_tpl</title>
+  <meta name="keywords" content="F_sl_func_tpl">
+  <meta name="description" content="F_SL_FUNC_TPL  Production d'un en-tete de fonction MSLIB">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Tools -->
+<h1>F_sl_func_tpl
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>F_SL_FUNC_TPL  Production d'un en-tete de fonction MSLIB</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">F_SL_FUNC_TPL  Production d'un en-tete de fonction MSLIB
+   [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name)   
+  
+   ENTREE(S):
+      - v_function_name : nom de la nouvelle fonction a creer
+      
+   SORTIE(S):
+      - v_head_lines (cell de strings): lignes d'en-tete de la fonction (definition et
+      lignes d'aide) formatees et personnalisees
+      - v_file_name : nom de la fonction a creer
+  
+   CONTENU:
+     - le nom reel de la fonction est prefixe par convention avec 'F_'  
+     pour le travail sur MultiSimLib
+     - des informations personnalisees dans les lignes produites: la ligne de 
+     definition de la fonction, le debut de la ligne de description, le
+     nom de l'auteur, la date de creation du fichier. 
+
+   APPEL(S): 
+      - 
+  
+   EXEMPLE(S): 
+      - [lignes,nom_fichier] = F_sl_func_tpl('NomFonction')
+  
+  AUTEUR(S): P. Lecharpentier
+  DATE: 27-Nov-2006
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+ Voir aussi <a href="F_sl_new_func.html" class="code" title="function F_sl_new_func(varargin)">F_sl_new_func</a>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="F_sl_new_func.html" class="code" title="function F_sl_new_func(varargin)">F_sl_new_func</a>	F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab</li></ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name)</a>
+0002 <span class="comment">%F_SL_FUNC_TPL  Production d'un en-tete de fonction MSLIB</span>
+0003 <span class="comment">%   [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name)</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%   ENTREE(S):</span>
+0006 <span class="comment">%      - v_function_name : nom de la nouvelle fonction a creer</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   SORTIE(S):</span>
+0009 <span class="comment">%      - v_head_lines (cell de strings): lignes d'en-tete de la fonction (definition et</span>
+0010 <span class="comment">%      lignes d'aide) formatees et personnalisees</span>
+0011 <span class="comment">%      - v_file_name : nom de la fonction a creer</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   CONTENU:</span>
+0014 <span class="comment">%     - le nom reel de la fonction est prefixe par convention avec 'F_'</span>
+0015 <span class="comment">%     pour le travail sur MultiSimLib</span>
+0016 <span class="comment">%     - des informations personnalisees dans les lignes produites: la ligne de</span>
+0017 <span class="comment">%     definition de la fonction, le debut de la ligne de description, le</span>
+0018 <span class="comment">%     nom de l'auteur, la date de creation du fichier.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   APPEL(S):</span>
+0021 <span class="comment">%      -</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   EXEMPLE(S):</span>
+0024 <span class="comment">%      - [lignes,nom_fichier] = F_sl_func_tpl('NomFonction')</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%  AUTEUR(S): P. Lecharpentier</span>
+0027 <span class="comment">%  DATE: 27-Nov-2006</span>
+0028 <span class="comment">%  VERSION: 0</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0031 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0032 <span class="comment">%    $Author: plecharpent $</span>
+0033 <span class="comment">%    $Revision: 40 $</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">% See also F_sl_new_func</span>
+0037 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0038 
+0039 <span class="comment">% declaration des auteurs</span>
+0040 authors.lecharpe=<span class="string">'P. Lecharpentier'</span>;
+0041 authors.pcl=<span class="string">'P. Clastre'</span>;
+0042 authors.sbuis=<span class="string">'S. Buis'</span>;
+0043 authors.hvvarella=<span class="string">'H. V. Varella'</span>;
+0044 <span class="comment">% prefixage des fonctions</span>
+0045 v_prefix=<span class="string">'F_'</span>; <span class="comment">% fixe pour l'instant...par convention dans le projet</span>
+0046 <span class="comment">% recuperation du login</span>
+0047 [v_ret,v_login_str]=dos(<span class="string">'echo %username%'</span>);
+0048 clear v_ret;
+0049 <span class="comment">% on enleve ce qui n est pas lettre (ici il y a un retour charriot dans</span>
+0050 <span class="comment">% v_login_str) pour creer le v_user_name</span>
+0051 v_login_str=v_login_str(isletter(v_login_str));
+0052 <span class="keyword">if</span> ismember(v_login_str,fieldnames(authors))
+0053     <span class="comment">% recuperation du nom si v_login_str est un champ de authors</span>
+0054     v_username=authors.(v_login_str);
+0055 <span class="keyword">else</span>
+0056     v_username=<span class="string">'Nom inconnu'</span>;
+0057 <span class="keyword">end</span>
+0058 <span class="comment">% definition du nom du fichier</span>
+0059 v_file_name=[v_prefix v_function_name <span class="string">'.m'</span>];
+0060 <span class="comment">%</span>
+0061 <span class="comment">% v_head_lines={sprintf('function output = %s%s(input)',v_prefix,v_function_name)};</span>
+0062 <span class="comment">% v_head_lines{2}=[ '%F_' upper(v_function_name) '  One line description of the function here'];</span>
+0063 <span class="comment">% v_head_lines{3}=['%  ' sprintf(' output_args = F_%s(input_args)   Write here detailed input/ouput arguments list',v_function_name)];</span>
+0064 <span class="comment">% v_head_lines{4}='%  ';</span>
+0065 <span class="comment">% v_head_lines{5}='%   INPUT(S): input arguments decription';</span>
+0066 <span class="comment">% v_head_lines{6}='%      - ';</span>
+0067 <span class="comment">% v_head_lines{7}='%  ';</span>
+0068 <span class="comment">% v_head_lines{8}='%   OUTPUT(S): output arguments decription';</span>
+0069 <span class="comment">% v_head_lines{9}='%      - ';</span>
+0070 <span class="comment">% v_head_lines{10}='%  ';</span>
+0071 <span class="comment">% v_head_lines{11}='%   CONTENT: function description';</span>
+0072 <span class="comment">% v_head_lines{12}='%  ';</span>
+0073 <span class="comment">% v_head_lines{13}='%   CALLS: list of the called functions';</span>
+0074 <span class="comment">% v_head_lines{14}='%      - ';</span>
+0075 <span class="comment">% v_head_lines{15}='%  ';</span>
+0076 <span class="comment">% v_head_lines{16}='%   EXAMPLE(S): list of function uses';</span>
+0077 <span class="comment">% v_head_lines{17}='%      - ';</span>
+0078 <span class="comment">% v_head_lines{18}='%  ';</span>
+0079 <span class="comment">% v_head_lines{19}=['%  ' sprintf('AUTHOR(S): %s',v_username)];</span>
+0080 <span class="comment">% v_head_lines{20}=['%  DATE: ' date];</span>
+0081 <span class="comment">% v_head_lines{21}='%  VERSION: 0';</span>
+0082 <span class="comment">% v_head_lines{22}='%  ';</span>
+0083 <span class="comment">% v_head_lines{23}='%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%';</span>
+0084 
+0085 v_head_lines={sprintf(<span class="string">'function sorties = %s%s(entrees)'</span>,v_prefix,v_function_name)};
+0086 v_head_lines{2}=[ <span class="string">'% Description d''une ligne MAXI a placer ici'</span>];
+0087 <span class="comment">%v_head_lines{2}=[ '%F_' upper(v_function_name) '  Description d''une ligne a placer ici'];</span>
+0088 v_head_lines{3}=[ <span class="string">'% '</span>];
+0089 v_head_lines{4}=[ <span class="string">'% Description plus detaillee a placer ici'</span>];
+0090 <span class="comment">%v_head_lines{3}=['%  ' sprintf(' args_sortie = F_%s(args_entree)   Liste detaillee les arguments d''entree/sortie',v_function_name)];</span>
+0091 v_head_lines{5}=<span class="string">'%  '</span>;
+0092 v_head_lines{6}=<span class="string">'%   ENTREE(S): '</span>;
+0093 v_head_lines{7}=<span class="string">'%      - argin1 :'</span>;
+0094 v_head_lines{8}=<span class="string">'%            description du premier argument d''entree ...'</span>;
+0095 v_head_lines{9}=<span class="string">'%  '</span>;
+0096 v_head_lines{10}=<span class="string">'%   SORTIE(S): '</span>;
+0097 v_head_lines{11}=<span class="string">'%      - argout2 :'</span>;
+0098 v_head_lines{12}=<span class="string">'%            description du premier argument de sortie ...'</span>;
+0099 v_head_lines{13}=<span class="string">'%  '</span>;
+0100 v_head_lines{14}=<span class="string">'%   CONTENU: '</span>;
+0101 v_head_lines{15}=<span class="string">'%      descriptif des etapes de l''algorithme'</span>;
+0102 v_head_lines{16}=<span class="string">'%  '</span>;
+0103 v_head_lines{17}=<span class="string">'%   APPEL(S): liste des fonctions appelees'</span>;
+0104 v_head_lines{18}=<span class="string">'%      - '</span>;
+0105 v_head_lines{19}=<span class="string">'%  '</span>;
+0106 v_head_lines{20}=<span class="string">'%   EXEMPLE(S): cas d''utilisation de la fonction'</span>;
+0107 v_head_lines{21}=<span class="string">'%      - '</span>;
+0108 v_head_lines{22}=<span class="string">'%  '</span>;
+0109 v_head_lines{23}=[<span class="string">'%  '</span> sprintf(<span class="string">'AUTEUR(S): %s'</span>,v_username)];
+0110 v_head_lines{24}=[<span class="string">'%  DATE: '</span> date];
+0111 v_head_lines{25}=<span class="string">'%  VERSION: 0'</span>;
+0112 v_head_lines{26}=<span class="string">'%  '</span>;
+0113 v_head_lines{27}=<span class="string">'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'</span>;
+0114 <span class="comment">%</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

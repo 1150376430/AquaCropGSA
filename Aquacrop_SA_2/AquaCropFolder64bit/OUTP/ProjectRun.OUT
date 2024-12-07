@@ -1,0 +1,44 @@
+AquaCrop 4.0 (June 2012) - Output created on (date) : 21/03/2014   at (time) : 15:57:23
+Simulation run
+
+    RunNr     Day1   Month1    Year1     Rain      ETo       GD     CO2      Irri   Infilt   Runoff    Drain   Upflow        E     E/Ex       Tr   Tr/Trx    SaltIn   SaltOut    SaltUp  SaltProf     Cycle   SaltStr  FertStr  TempStr   ExpStr   StoStr  BioMass  Brelative   HI     Yield     WPet     DayN   MonthN    YearN
+                                           mm       mm    °C.day    ppm        mm       mm       mm       mm       mm       mm        %       mm        %    ton/ha    ton/ha    ton/ha    ton/ha      days       %        %        %        %        %    ton/ha        %       %    ton/ha    kg/m3
+        1       22        9     1996      872      975     3874   362.92        0      840       32      356        0      228       44      487       98     0.000     0.000     0.000     0.000      209        0        0       32        0        2    16.402       98     47.7    7.825     1.38       22        8     1997
+
+Legend
+
+RunNr      Number simulation run
+Day1       Start day of simulation run
+Month1     Start month of simulation run
+Year1      Start year of simulation run
+Rain       Rainfall
+ETo        Reference evapotranspiration
+GD         Growing degrees
+CO2        Atmospheric CO2 concentration
+Irri       Water applied by irrigation OR Net irrigation requirement
+Infilt     Infiltrated water in soil profile
+Runoff     Water lost by surface runoff
+Drain      Water drained out of the soil profile
+Upflow     Water moved upward by capillary rise
+E          Soil evaporation
+E/Ex       Relative soil evaporation (100 E/Ex)
+Tr         Crop transpiration
+Tr/Trx     Relative crop transpiration (100 Tr/Trx)
+SaltIn     Salt infiltrated in the soil profile
+SaltOut    Salt drained out of the soil profile
+SaltUp     Salt moved upward by capillary rise from groundwater table
+SaltProf   Salt stored in the soil profile
+Cycle      Length of crop cycle: from germination to maturity (or early senescence)
+SaltStr    Average soil salinity stress
+FertStr    Average soil fertility stress
+TempStr    Average temperature stress (affecting biomass)
+ExpStr     Average leaf expansion stress
+StoStr     Average stomatal stress
+Biomass    Cumulative biomass produced
+Brelative  Relative biomass (Reference: no water, no soil fertility, no soil salinity stress)
+HI         Harvest Index adjusted for failure of pollination, inadequate photosynthesis and water stress
+Yield      Yield (HI x Biomass)
+WPet       ET Water Productivity for yield part (kg yield produced per m3 water evapotranspired)
+DayN       End day of simulation run
+MonthN     End month of simulation run
+YearN      End year of simulation run

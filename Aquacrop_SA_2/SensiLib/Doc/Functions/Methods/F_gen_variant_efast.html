@@ -1,0 +1,459 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_gen_variant_efast</title>
+  <meta name="keywords" content="F_gen_variant_efast">
+  <meta name="description" content="Generation des variants pour la methode FAST.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Methods -->
+<h1>F_gen_variant_efast
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Generation des variants pour la methode FAST.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [v_in_mat,v_Ns,v_w]=F_gen_variant_efast(vs_factors_def,vs_method_options) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Generation des variants pour la methode FAST.
+
+ Cette fonction sert a generer un echantillon pour le calcul des indices 
+ principaux et totaux avec la methode Extended FAST. Cette methode est
+ decrite en detail dans le document &quot;La methode FAST et ses extensions&quot;
+ qui servira de reference dans les commentaires suivants (notamment pour 
+ les formules utilisees).
+
+
+ ENTREES :
+
+      - vs_factors_def : structure de definition des facteurs
+          o vs_factors_def.Dist (OPTIONNEL) : vecteur de cell contenant le type de distribution pour
+            chaque facteur.
+            Pour voir la liste des distributions disponibles, executer la
+            fonction F_create_sample() sans argument.
+            ATTENTION: pour utiliser des lois autres que les lois uniforme et 
+            triangulaire il est necessaire d'avoir la toolbox matlab &quot;statistics&quot;.
+            ATTENTION: la methode ne fonctionne pas avec la distribution
+            'discrete'.
+            Si ce champ n'est pas precise ou est vide, les distributions des facteurs seront toutes fixees e
+            'uniform'. 
+            Si le vecteur ne contient qu'une seule distribution alors tous les facteurs auront
+            la distribution donnee.
+            Dans ces deux derniers cas le champ Nb devra etre
+            precise (cf. ci-apres).
+          o vs_factors_def.DistParams (OPTIONNEL) : vecteur de cell
+            contenant le vecteur des parametres de la distribution 
+            pour chaque facteur. 
+            Pour voir la liste des parametres requis pour chaque distribution
+            disponible, executer la fonction F_create_sample() sans argument.
+            Si ce champ n'est pas fourni ou est vide, les parametres
+            seront fixes a 0 et 1.
+            Si ce champ ne contient qu'un vecteur de parametre, ces
+            parametres seront utilises pour toutes les distributions.
+          o vs_factors_def.Nb (OPTIONNEL) : scalaire contenant le
+            nombre de facteurs. Obligatoire si le champ Dist n'est pas
+            precise, est vide ou ne contient qu'une seule distribution. 
+
+      - vs_method_options : structure de definition des options de la
+        methode
+          o vs_method_options.NsIni : scalaire entier contenant la taille de
+            l'echantillon souhaitee par l'utilisateur. Cette taille doit 
+            etre superieure ou egale a 65.
+            Le calcul des frequences a partir de Ns impose que 
+            (Ns-1) soit un multiple de (2*M)^2). Si tel n'est pas le
+            cas pour NsIni, on prendra le plus grand ne inferieur a 
+            NsIni qui satisfait cette condition. 
+            La taille reelle de l'echantillon sera donc :
+             v_Ns=(NsIni-mod(NsIni-1,(2*M)^2));
+            Le nombre total de simulations a realiser pour calculer les
+            indices sera alors de v_C=v_Ns*(Nb+1)*Nrep, ou Nb est 
+            le nombre de parametres variant.
+          o vs_method_options.Nrep (OPTIONNEL) : scalaire entier contenant le no de re-echantillonage ou de 
+            replicat i.e. le no de fois que les indices doivent etre 
+            calcules de facon independante (no de tirages aleatoires du 
+            shift phi). 
+            Vaut 1 par defaut. 
+          o vs_method_options.Seed (OPTIONNEL) : scalaire contenant la
+            graine pour le tirage aleatoire du shift phi.
+            Sa valeur par defaut change systematiquement afin que la
+            valeur de phi soit toujours differente. Si Seed est fixe, la
+            valeur de phi sera differente entre les Nrep repetitions interne, 
+            mais identique entre 2 appels a F_gen_variant_EFAST.
+          o vs_method_options.FlagDummy (OPTIONNEL) : scalaire booleen : 
+             * 1 pour considerer un parametre supplementaire, appele parametre 
+               dummy, qui n'intervient pas dans le modele, pour tester la 
+               significativite des indices calcules.
+               Dans ce cas, Ns*Nrep simulations supplementaires du
+               modele seront effectues par rapport au cas sans parametre
+               dummy.
+             * 0 sinon.
+            Vaut 1 par defaut.
+          o vs_method_options.M (OPTIONNEL) : nombre maximal d'harmonique
+            pris en compte dans la methode.
+            Vaut 4 par defaut.
+
+ SORTIE :
+       - v_in_mat : 
+          matrice de type flottant, de taille (v_C=v_Ns*(Nb+1)*Nrep,Nb), 
+          contenant l'echantillon. 
+          ou Nb est le no de parametres variants.
+
+       - v_Ns : 
+          scalaire entier contenant la taille reelle de
+          l'echantillon utilisee. Cette taille vaut :
+           v_Ns=(NsIni-mod(NsIni-1,(2*M)^2));
+          Le nombre total de simulations a realiser pour calculer les
+          indices est alors de v_C=v_Ns*(Nb+1)*Nrep, ou Nb est 
+          le nombre de parametres variant.
+
+       - v_w : 
+          vecteur entier de taille le nombre de parametres variants 
+          contenant la liste des frequences utilisees dans la methode.
+
+
+ CONTENU :
+      On commence par definir la taille de l'echantillon a partir de celle
+      donnee par l'utilisateur (la taille de l'echantillon -1 doit etre un 
+      multiple de (2*M)^2), ou M est le no maximum d'harmoniques
+      prises en compte.
+      On definie ensuite les variations de la variable s dans ]-pi,pi[ a 
+      partir duquel on va calculer les variants.
+      On definie la liste de frequence a partir de la taille d'echantillon
+      avec l'algorithme propose dans Saltelli et al 1999.
+      On tire aleatoirement autant de shift phi que de parametres.
+      Puis, pour chaque parametre : 
+           - on met a jour la liste des frequences (la frequence maximum
+             est affectee au parametre pour lequel on calcule les effets, 
+             les frequences des autres parametres etant issue de la liste 
+             de frequence calculee au debut)
+           - on applique la fonction de transformation Gi pour obtenir les
+             variant normalises a partir de s, des frequences et des phi;
+           - on transforme les variants dans l'espace des parametres a 
+             partir de la loi donnee par l'utilisateur;
+      et on obtient ainsi la liste des variants pour le calcul des indices
+      de chaque parametre ... et on fait ca Nrep fois.
+     
+ AUTEUR : S. BUIS ET H.V VARELLA 
+         (merci a J.Jacques et C.Naud pour leurs contributions)
+ DATE : 25-mai-2007
+ VERSION : 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v_in_mat,v_Ns,v_w]=F_gen_variant_efast(vs_factors_def,vs_method_options)</a>
+0002 <span class="comment">% Generation des variants pour la methode FAST.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Cette fonction sert a generer un echantillon pour le calcul des indices</span>
+0005 <span class="comment">% principaux et totaux avec la methode Extended FAST. Cette methode est</span>
+0006 <span class="comment">% decrite en detail dans le document &quot;La methode FAST et ses extensions&quot;</span>
+0007 <span class="comment">% qui servira de reference dans les commentaires suivants (notamment pour</span>
+0008 <span class="comment">% les formules utilisees).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">% ENTREES :</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%      - vs_factors_def : structure de definition des facteurs</span>
+0014 <span class="comment">%          o vs_factors_def.Dist (OPTIONNEL) : vecteur de cell contenant le type de distribution pour</span>
+0015 <span class="comment">%            chaque facteur.</span>
+0016 <span class="comment">%            Pour voir la liste des distributions disponibles, executer la</span>
+0017 <span class="comment">%            fonction F_create_sample() sans argument.</span>
+0018 <span class="comment">%            ATTENTION: pour utiliser des lois autres que les lois uniforme et</span>
+0019 <span class="comment">%            triangulaire il est necessaire d'avoir la toolbox matlab &quot;statistics&quot;.</span>
+0020 <span class="comment">%            ATTENTION: la methode ne fonctionne pas avec la distribution</span>
+0021 <span class="comment">%            'discrete'.</span>
+0022 <span class="comment">%            Si ce champ n'est pas precise ou est vide, les distributions des facteurs seront toutes fixees e</span>
+0023 <span class="comment">%            'uniform'.</span>
+0024 <span class="comment">%            Si le vecteur ne contient qu'une seule distribution alors tous les facteurs auront</span>
+0025 <span class="comment">%            la distribution donnee.</span>
+0026 <span class="comment">%            Dans ces deux derniers cas le champ Nb devra etre</span>
+0027 <span class="comment">%            precise (cf. ci-apres).</span>
+0028 <span class="comment">%          o vs_factors_def.DistParams (OPTIONNEL) : vecteur de cell</span>
+0029 <span class="comment">%            contenant le vecteur des parametres de la distribution</span>
+0030 <span class="comment">%            pour chaque facteur.</span>
+0031 <span class="comment">%            Pour voir la liste des parametres requis pour chaque distribution</span>
+0032 <span class="comment">%            disponible, executer la fonction F_create_sample() sans argument.</span>
+0033 <span class="comment">%            Si ce champ n'est pas fourni ou est vide, les parametres</span>
+0034 <span class="comment">%            seront fixes a 0 et 1.</span>
+0035 <span class="comment">%            Si ce champ ne contient qu'un vecteur de parametre, ces</span>
+0036 <span class="comment">%            parametres seront utilises pour toutes les distributions.</span>
+0037 <span class="comment">%          o vs_factors_def.Nb (OPTIONNEL) : scalaire contenant le</span>
+0038 <span class="comment">%            nombre de facteurs. Obligatoire si le champ Dist n'est pas</span>
+0039 <span class="comment">%            precise, est vide ou ne contient qu'une seule distribution.</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%      - vs_method_options : structure de definition des options de la</span>
+0042 <span class="comment">%        methode</span>
+0043 <span class="comment">%          o vs_method_options.NsIni : scalaire entier contenant la taille de</span>
+0044 <span class="comment">%            l'echantillon souhaitee par l'utilisateur. Cette taille doit</span>
+0045 <span class="comment">%            etre superieure ou egale a 65.</span>
+0046 <span class="comment">%            Le calcul des frequences a partir de Ns impose que</span>
+0047 <span class="comment">%            (Ns-1) soit un multiple de (2*M)^2). Si tel n'est pas le</span>
+0048 <span class="comment">%            cas pour NsIni, on prendra le plus grand ne inferieur a</span>
+0049 <span class="comment">%            NsIni qui satisfait cette condition.</span>
+0050 <span class="comment">%            La taille reelle de l'echantillon sera donc :</span>
+0051 <span class="comment">%             v_Ns=(NsIni-mod(NsIni-1,(2*M)^2));</span>
+0052 <span class="comment">%            Le nombre total de simulations a realiser pour calculer les</span>
+0053 <span class="comment">%            indices sera alors de v_C=v_Ns*(Nb+1)*Nrep, ou Nb est</span>
+0054 <span class="comment">%            le nombre de parametres variant.</span>
+0055 <span class="comment">%          o vs_method_options.Nrep (OPTIONNEL) : scalaire entier contenant le no de re-echantillonage ou de</span>
+0056 <span class="comment">%            replicat i.e. le no de fois que les indices doivent etre</span>
+0057 <span class="comment">%            calcules de facon independante (no de tirages aleatoires du</span>
+0058 <span class="comment">%            shift phi).</span>
+0059 <span class="comment">%            Vaut 1 par defaut.</span>
+0060 <span class="comment">%          o vs_method_options.Seed (OPTIONNEL) : scalaire contenant la</span>
+0061 <span class="comment">%            graine pour le tirage aleatoire du shift phi.</span>
+0062 <span class="comment">%            Sa valeur par defaut change systematiquement afin que la</span>
+0063 <span class="comment">%            valeur de phi soit toujours differente. Si Seed est fixe, la</span>
+0064 <span class="comment">%            valeur de phi sera differente entre les Nrep repetitions interne,</span>
+0065 <span class="comment">%            mais identique entre 2 appels a F_gen_variant_EFAST.</span>
+0066 <span class="comment">%          o vs_method_options.FlagDummy (OPTIONNEL) : scalaire booleen :</span>
+0067 <span class="comment">%             * 1 pour considerer un parametre supplementaire, appele parametre</span>
+0068 <span class="comment">%               dummy, qui n'intervient pas dans le modele, pour tester la</span>
+0069 <span class="comment">%               significativite des indices calcules.</span>
+0070 <span class="comment">%               Dans ce cas, Ns*Nrep simulations supplementaires du</span>
+0071 <span class="comment">%               modele seront effectues par rapport au cas sans parametre</span>
+0072 <span class="comment">%               dummy.</span>
+0073 <span class="comment">%             * 0 sinon.</span>
+0074 <span class="comment">%            Vaut 1 par defaut.</span>
+0075 <span class="comment">%          o vs_method_options.M (OPTIONNEL) : nombre maximal d'harmonique</span>
+0076 <span class="comment">%            pris en compte dans la methode.</span>
+0077 <span class="comment">%            Vaut 4 par defaut.</span>
+0078 <span class="comment">%</span>
+0079 <span class="comment">% SORTIE :</span>
+0080 <span class="comment">%       - v_in_mat :</span>
+0081 <span class="comment">%          matrice de type flottant, de taille (v_C=v_Ns*(Nb+1)*Nrep,Nb),</span>
+0082 <span class="comment">%          contenant l'echantillon.</span>
+0083 <span class="comment">%          ou Nb est le no de parametres variants.</span>
+0084 <span class="comment">%</span>
+0085 <span class="comment">%       - v_Ns :</span>
+0086 <span class="comment">%          scalaire entier contenant la taille reelle de</span>
+0087 <span class="comment">%          l'echantillon utilisee. Cette taille vaut :</span>
+0088 <span class="comment">%           v_Ns=(NsIni-mod(NsIni-1,(2*M)^2));</span>
+0089 <span class="comment">%          Le nombre total de simulations a realiser pour calculer les</span>
+0090 <span class="comment">%          indices est alors de v_C=v_Ns*(Nb+1)*Nrep, ou Nb est</span>
+0091 <span class="comment">%          le nombre de parametres variant.</span>
+0092 <span class="comment">%</span>
+0093 <span class="comment">%       - v_w :</span>
+0094 <span class="comment">%          vecteur entier de taille le nombre de parametres variants</span>
+0095 <span class="comment">%          contenant la liste des frequences utilisees dans la methode.</span>
+0096 <span class="comment">%</span>
+0097 <span class="comment">%</span>
+0098 <span class="comment">% CONTENU :</span>
+0099 <span class="comment">%      On commence par definir la taille de l'echantillon a partir de celle</span>
+0100 <span class="comment">%      donnee par l'utilisateur (la taille de l'echantillon -1 doit etre un</span>
+0101 <span class="comment">%      multiple de (2*M)^2), ou M est le no maximum d'harmoniques</span>
+0102 <span class="comment">%      prises en compte.</span>
+0103 <span class="comment">%      On definie ensuite les variations de la variable s dans ]-pi,pi[ a</span>
+0104 <span class="comment">%      partir duquel on va calculer les variants.</span>
+0105 <span class="comment">%      On definie la liste de frequence a partir de la taille d'echantillon</span>
+0106 <span class="comment">%      avec l'algorithme propose dans Saltelli et al 1999.</span>
+0107 <span class="comment">%      On tire aleatoirement autant de shift phi que de parametres.</span>
+0108 <span class="comment">%      Puis, pour chaque parametre :</span>
+0109 <span class="comment">%           - on met a jour la liste des frequences (la frequence maximum</span>
+0110 <span class="comment">%             est affectee au parametre pour lequel on calcule les effets,</span>
+0111 <span class="comment">%             les frequences des autres parametres etant issue de la liste</span>
+0112 <span class="comment">%             de frequence calculee au debut)</span>
+0113 <span class="comment">%           - on applique la fonction de transformation Gi pour obtenir les</span>
+0114 <span class="comment">%             variant normalises a partir de s, des frequences et des phi;</span>
+0115 <span class="comment">%           - on transforme les variants dans l'espace des parametres a</span>
+0116 <span class="comment">%             partir de la loi donnee par l'utilisateur;</span>
+0117 <span class="comment">%      et on obtient ainsi la liste des variants pour le calcul des indices</span>
+0118 <span class="comment">%      de chaque parametre ... et on fait ca Nrep fois.</span>
+0119 <span class="comment">%</span>
+0120 <span class="comment">% AUTEUR : S. BUIS ET H.V VARELLA</span>
+0121 <span class="comment">%         (merci a J.Jacques et C.Naud pour leurs contributions)</span>
+0122 <span class="comment">% DATE : 25-mai-2007</span>
+0123 <span class="comment">% VERSION : 0</span>
+0124 <span class="comment">%</span>
+0125 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0126 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0127 <span class="comment">%    $Author: plecharpent $</span>
+0128 <span class="comment">%    $Revision: 40 $</span>
+0129 <span class="comment">%</span>
+0130 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0131 
+0132 
+0133 <span class="comment">%% Definition du tableau contenant les options de la methode</span>
+0134 vc_options_desc=struct(<span class="string">'name'</span>,{<span class="string">'NsIni'</span>,<span class="string">'Nrep'</span>,<span class="string">'Seed'</span>,<span class="string">'FlagDummy'</span>,<span class="string">'M'</span>},<span class="keyword">...</span>
+0135     <span class="string">'datatype'</span>,{<span class="string">'uint32'</span>,<span class="string">'uint32'</span>,<span class="string">'double'</span>,<span class="string">'uint32'</span>,<span class="string">'uint32'</span>},<span class="keyword">...</span>
+0136     <span class="string">'status'</span>,{<span class="string">'non optional'</span>,<span class="string">'optional'</span>,<span class="string">'optional'</span>,<span class="string">'optional'</span>,<span class="string">'optional'</span>},<span class="keyword">...</span>
+0137     <span class="string">'defaultvalue'</span>,{[],1,[],1,4},<span class="keyword">...</span>
+0138     <span class="string">'comments'</span>,{<span class="string">'Taille de l''echantillon souhaitee par l''utilisateur'</span>, <span class="keyword">...</span>
+0139                 <span class="string">'Nombre de replicat de la methode'</span>,<span class="keyword">...</span>
+0140                 <span class="string">'Graine pour le tirage aleatoire du shift phi'</span>,<span class="keyword">...</span>
+0141                 <span class="string">'1 pour considerer un parametre dummy, 0 sinon'</span>,<span class="keyword">...</span>
+0142                 <span class="string">'Nombre maximal d''harmoniques prises en compte'</span>});
+0143 
+0144 <span class="comment">%% Retour de la structure pour verification si appel sans arguments</span>
+0145 <span class="keyword">if</span> nargin==0
+0146     v_in_mat=vc_options_desc;
+0147     <span class="keyword">return</span>
+0148 <span class="keyword">end</span>
+0149 
+0150 <span class="comment">%% Renseignement des options par defaut</span>
+0151 <span class="keyword">for</span> i=1:length(vc_options_desc)
+0152     <span class="keyword">if</span> ~isfield(vs_method_options,vc_options_desc(i).name)
+0153         <span class="keyword">if</span> strmatch(<span class="string">'optional'</span>,vc_options_desc(i).status,<span class="string">'exact'</span>)
+0154             vs_method_options.(vc_options_desc(i).name)=vc_options_desc(i).defaultvalue;
+0155         <span class="keyword">else</span>
+0156             error([<span class="string">'L''option '</span> vc_options_desc(i).name <span class="string">' doit etre renseignee.'</span>])
+0157         <span class="keyword">end</span>
+0158     <span class="keyword">end</span>
+0159 <span class="keyword">end</span>
+0160 
+0161 <span class="comment">%% Tests divers sur les arguments</span>
+0162 <span class="keyword">if</span> ~isfield(vs_factors_def,<span class="string">'Dist'</span>) || isempty(vs_factors_def.Dist)
+0163     vs_factors_def.Dist={<span class="string">'uniform'</span>};
+0164 <span class="keyword">end</span>
+0165 <span class="keyword">if</span> length(vs_factors_def.Dist)==1
+0166     F_create_message(<span class="string">'Probleme dans les arguments en entree'</span>,<span class="keyword">...</span>
+0167             <span class="string">'Lorsque le champ dist de l''argument vs_factors_def n''est pas fourni ou ne contient qu''une distribution, le champ Nb de l''argument vs_factors_def doit etre defini.'</span>,<span class="keyword">...</span>
+0168             ~isfield(vs_factors_def,<span class="string">'Nb'</span>) || isempty(vs_factors_def.Nb),1);
+0169     vs_factors_def.Dist=mat2cell(repmat(vs_factors_def.Dist{1},vs_factors_def.Nb,1),ones(1,vs_factors_def.Nb),length(vs_factors_def.Dist{1}));
+0170 <span class="keyword">else</span>
+0171     vs_factors_def.Nb=length(vs_factors_def.Dist);
+0172 <span class="keyword">end</span>
+0173 F_create_message(<span class="string">''</span>,<span class="keyword">...</span>
+0174     <span class="string">'La methode ne fonctionne pas avec la distribution ''discrete''.'</span>,<span class="keyword">...</span>
+0175     ~isempty(strmatch(<span class="string">'discrete'</span>,vs_factors_def.Dist,<span class="string">'exact'</span>)),1);
+0176 <span class="keyword">if</span> ~isfield(vs_factors_def,<span class="string">'DistParams'</span>) || isempty(vs_factors_def.DistParams)
+0177     vs_factors_def.DistParams={[0,1]};
+0178 <span class="keyword">end</span>
+0179 <span class="keyword">if</span> length(vs_factors_def.DistParams)==1
+0180     <span class="keyword">for</span> i=2:vs_factors_def.Nb
+0181         vs_factors_def.DistParams{i}=vs_factors_def.DistParams{1};
+0182     <span class="keyword">end</span>
+0183 <span class="keyword">end</span>       
+0184 v_Nrep=vs_method_options.Nrep;
+0185 v_M=vs_method_options.M;
+0186 v_flag_dummy=vs_method_options.FlagDummy;
+0187 v_Ns_ini=vs_method_options.NsIni;
+0188 v_Seed=vs_method_options.Seed;
+0189 v_n=vs_factors_def.Nb;
+0190 vc_distribution=vs_factors_def.Dist;
+0191 vc_distr_param=vs_factors_def.DistParams;
+0192 
+0193 <span class="comment">% Verification du nombre de phi</span>
+0194 <span class="keyword">if</span> (v_Nrep&lt;=0)
+0195    error(<span class="string">'Erreur : Nrep doit etre superieur a 0.'</span>);
+0196 <span class="keyword">end</span>  
+0197 
+0198 <span class="comment">% Ajout du parametre Dummy dans les vecteurs v_cdf_p1,v_cdf_p2 et</span>
+0199 <span class="comment">% v_distribution_law si necessaire</span>
+0200 <span class="keyword">if</span> v_flag_dummy
+0201     vc_distribution{end+1}=<span class="string">'uniform'</span>;
+0202     vc_distr_param{end+1}=[0,1];
+0203     v_n=v_n+1;
+0204 <span class="keyword">end</span>
+0205 
+0206 <span class="comment">% Initialisation</span>
+0207 v_c1=1./pi; 
+0208 
+0209 <span class="comment">% Initialisation de l'algorithme de tirage aleatoire</span>
+0210 F_rand_init(v_Seed);
+0211 
+0212 <span class="comment">% Verification de la taille de l'echantillon</span>
+0213 
+0214 <span class="keyword">if</span> (v_Ns_ini&lt;(2*v_M)^2+1)
+0215    error([<span class="string">'La taille de l''echantillon est trop faible : elle doit etre superieure a '</span> int2str((2*v_M)^2+1)]);
+0216 <span class="keyword">end</span>
+0217 
+0218 <span class="comment">% Calcul de la taille de l'echantillon pour le calcul des effets totaux</span>
+0219 <span class="comment">% v_Ns-1 doit etre un multiple de (2*v_M)^2 pour la definition</span>
+0220 <span class="comment">% des frequences (formules (28) et (30)).</span>
+0221 v_Ns=(v_Ns_ini-mod(v_Ns_ini-1,(2*v_M)^2));
+0222 
+0223 <span class="comment">% Variations du parametre s dans ]-pi,pi[ (formule 20).</span>
+0224 v_step_s=2*pi/v_Ns;
+0225 <span class="keyword">for</span> i=1:v_Ns
+0226    v_s(i)=-pi+pi/v_Ns+(i-1)*v_step_s;
+0227 <span class="keyword">end</span>
+0228 
+0229 <span class="comment">% Calcul de la frequence maximale et de la liste de frequence</span>
+0230 <span class="comment">% a partir de la taille de l'echantillon selon l'algorithme presente</span>
+0231 <span class="comment">% section IV.3</span>
+0232 v_wmax=(v_Ns-1)/(2*v_M);
+0233 v_step_w=floor((v_wmax/(2*v_M))/v_n);
+0234 <span class="keyword">if</span> v_step_w==0   <span class="comment">% cas ou plusieurs frequences sont identiques mais</span>
+0235     v_step_w=1;  <span class="comment">% differentes de 1</span>
+0236 <span class="keyword">end</span>
+0237 v_max_wmi=v_wmax/(2*v_M);
+0238 v_w_tmp(1)=1;
+0239 <span class="keyword">for</span> i=2:v_n
+0240     <span class="keyword">if</span> (v_w_tmp(i-1)==v_max_wmi)
+0241         v_w_tmp(i)=1;
+0242     <span class="keyword">else</span>
+0243         v_w_tmp(i)=v_w_tmp(i-1)+v_step_w;
+0244     <span class="keyword">end</span>
+0245 <span class="keyword">end</span>
+0246 
+0247 v_indmin=1;
+0248 
+0249 <span class="comment">% Boucle sur le nombre de replicats</span>
+0250 <span class="keyword">for</span> i=1:v_Nrep
+0251         
+0252    <span class="comment">% tirage aleatoire du shift phi</span>
+0253    v_phi=rand(v_n,1)*2*pi;
+0254    <span class="comment">%v_phi=zeros(v_n,1);</span>
+0255         
+0256    <span class="keyword">for</span> j=1:v_n
+0257 
+0258       <span class="comment">% Mise a jour de la liste de frequence</span>
+0259       v_w=v_w_tmp;
+0260       v_w(j)=v_wmax;
+0261 
+0262       v_indmax=v_indmin+v_Ns-1;
+0263 
+0264       <span class="comment">% Creation des variants normalises.</span>
+0265       <span class="comment">% Utilisation de la fonction de transformation Gi definie formule (7)</span>
+0266       <span class="comment">% et du changement de variable definis formule (31)</span>
+0267       <span class="keyword">for</span> k=1:v_n-v_flag_dummy
+0268          v_in_mat(v_indmin:v_indmax,k)=0.5+v_c1*asin(sin(v_w(k)*v_s+v_phi(k)));
+0269       <span class="keyword">end</span>
+0270             
+0271       <span class="comment">% Transformation dans l'espace des parametres a partir des lois choisies</span>
+0272       <span class="comment">% par l'utilisateur</span>
+0273       <span class="keyword">for</span> k=1:v_n-v_flag_dummy
+0274          [v_flag_truncated, v_in_mat(v_indmin:v_indmax,k)]=F_inverse_cdf(vc_distribution{k},vc_distr_param{k},v_in_mat(v_indmin:v_indmax,k));
+0275          F_create_message([<span class="string">'Facteur '</span> num2str(k)],<span class="keyword">...</span>
+0276             <span class="string">'La methode ne fonctionne pas avec les distributions tronquees.'</span>,<span class="keyword">...</span>
+0277             v_flag_truncated,1);
+0278       <span class="keyword">end</span> 
+0279             
+0280       v_indmin=v_indmax+1;
+0281 
+0282    <span class="keyword">end</span> 
+0283 
+0284    <span class="comment">% On reaffecte a v_w la liste originale, la frequence maximale etant</span>
+0285    <span class="comment">% stockee en v_w(1) (v_w_tmp(1) valant toujours 1 ...)</span>
+0286    v_w=v_w_tmp;
+0287    v_w(1)=v_wmax;
+0288    
+0289 <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

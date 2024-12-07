@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_sl_new_func</title>
+  <meta name="keywords" content="F_sl_new_func">
+  <meta name="description" content="F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Tools -->
+<h1>F_sl_new_func
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function F_sl_new_func(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab
+   F_sl_new_func([v_function_name,v_save,v_file_dir])
+  
+   ENTREE(S): 
+       - v_function_name : nom de la nouvelle fonction a creer
+       - utiliser v_save ou v_file_dir (si v_file_dir est donne le fichier est 
+         enregistre
+            * v_save : 1 pour enregistrer,  0 (valeur par defaut) sinon
+            * v_file_dir : chemin du repertoire dans lequel le fichier
+            sera cree
+
+   SORTIE(S): 
+       - pas d'argument de sortie
+       - un fichier temporaire ou enregistre sous le nom F_nom_fonction.m
+       ,si pas d'argument, ou F_[v_function_name].m, sinon dans le
+       repertoire courant ou designe par v_file_dir.
+       
+
+   CONTENT: 
+       Creation d'un fichier M pre-formate (definition fonction, section d'aide )
+       avec un nom par defaut (F_nom_fonction) ou v_function_name si specifie. 
+       Le fichier peut etre sauve dans le repertoire courant (v_save=1) ou automatiquement
+       dans un repertoire specifique (v_file_dir).
+       Le fichier est ouvert par defaut dans une fenetre d'edition.
+
+   CALLS: 
+       - F_sl_func_tpl
+       - F_sl_gen_file
+  
+   EXAMPLE(S): 
+       F_sl_new_func()
+       F_sl_new_func(my_func)
+       F_sl_new_func(my_func,1)
+       F_sl_new_func(my_func,'c:\homedir\matlabdir')
+  
+  AUTHOR(S): P. Lecharpentier + modifs S. Buis
+  DATE: 23-Nov-2006
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+ Voir aussi F_msl_func_tpl, F_gen_file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="F_sl_func_tpl.html" class="code" title="function [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name)">F_sl_func_tpl</a>	F_SL_FUNC_TPL  Production d'un en-tete de fonction MSLIB</li><li><a href="F_sl_gen_file.html" class="code" title="function F_sl_gen_file(v_file_lines,v_file_path,v_save,v_edit,varargin)">F_sl_gen_file</a>	Creation et edition d'un fichier</li></ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function F_sl_new_func(varargin)</a>
+0002 <span class="comment">%F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab</span>
+0003 <span class="comment">%   F_sl_new_func([v_function_name,v_save,v_file_dir])</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%   ENTREE(S):</span>
+0006 <span class="comment">%       - v_function_name : nom de la nouvelle fonction a creer</span>
+0007 <span class="comment">%       - utiliser v_save ou v_file_dir (si v_file_dir est donne le fichier est</span>
+0008 <span class="comment">%         enregistre</span>
+0009 <span class="comment">%            * v_save : 1 pour enregistrer,  0 (valeur par defaut) sinon</span>
+0010 <span class="comment">%            * v_file_dir : chemin du repertoire dans lequel le fichier</span>
+0011 <span class="comment">%            sera cree</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   SORTIE(S):</span>
+0014 <span class="comment">%       - pas d'argument de sortie</span>
+0015 <span class="comment">%       - un fichier temporaire ou enregistre sous le nom F_nom_fonction.m</span>
+0016 <span class="comment">%       ,si pas d'argument, ou F_[v_function_name].m, sinon dans le</span>
+0017 <span class="comment">%       repertoire courant ou designe par v_file_dir.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   CONTENT:</span>
+0021 <span class="comment">%       Creation d'un fichier M pre-formate (definition fonction, section d'aide )</span>
+0022 <span class="comment">%       avec un nom par defaut (F_nom_fonction) ou v_function_name si specifie.</span>
+0023 <span class="comment">%       Le fichier peut etre sauve dans le repertoire courant (v_save=1) ou automatiquement</span>
+0024 <span class="comment">%       dans un repertoire specifique (v_file_dir).</span>
+0025 <span class="comment">%       Le fichier est ouvert par defaut dans une fenetre d'edition.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   CALLS:</span>
+0028 <span class="comment">%       - F_sl_func_tpl</span>
+0029 <span class="comment">%       - F_sl_gen_file</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   EXAMPLE(S):</span>
+0032 <span class="comment">%       F_sl_new_func()</span>
+0033 <span class="comment">%       F_sl_new_func(my_func)</span>
+0034 <span class="comment">%       F_sl_new_func(my_func,1)</span>
+0035 <span class="comment">%       F_sl_new_func(my_func,'c:\homedir\matlabdir')</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%  AUTHOR(S): P. Lecharpentier + modifs S. Buis</span>
+0038 <span class="comment">%  DATE: 23-Nov-2006</span>
+0039 <span class="comment">%  VERSION: 0</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0042 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0043 <span class="comment">%    $Author: plecharpent $</span>
+0044 <span class="comment">%    $Revision: 40 $</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%</span>
+0047 <span class="comment">% See also F_msl_func_tpl, F_gen_file</span>
+0048 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0049 
+0050 <span class="comment">% par defaut pas d'enregistrement du fichier et dir=rep courant (workspace)</span>
+0051 v_gen=0;
+0052 v_save=0;
+0053 v_file_dir=pwd;
+0054 <span class="comment">%</span>
+0055 <span class="keyword">switch</span> nargin
+0056     <span class="keyword">case</span> 0
+0057         disp(<span class="string">'Specifier le nom de la fonction e creer...'</span>)
+0058     <span class="keyword">case</span> {1,2}
+0059         v_gen=1;
+0060         v_function_name=lower(varargin{1});
+0061         v_function_name=regexprep(v_function_name, <span class="string">' *'</span>, <span class="string">'_'</span>);
+0062         <span class="comment">% if the arg is a char : file directory</span>
+0063         <span class="keyword">if</span> nargin==2
+0064             <span class="keyword">if</span> ischar(varargin{2})
+0065                 v_save=1;
+0066                 v_file_dir=varargin{2};
+0067             <span class="keyword">elseif</span> isnumeric(varargin{2})
+0068                 v_save=varargin{2};
+0069             <span class="keyword">end</span>
+0070         <span class="keyword">end</span>
+0071     <span class="keyword">otherwise</span>
+0072         error(<span class="string">'Trop d''arguments specifies...'</span>);
+0073 <span class="keyword">end</span>
+0074 <span class="keyword">if</span> v_gen
+0075     <span class="comment">% recuperation des lignes a creer dans le nouveau M-file et du nom du fichier</span>
+0076     <span class="comment">% via F_msl_func_tpl</span>
+0077     [v_head_lines,v_file_name]=<a href="F_sl_func_tpl.html" class="code" title="function [v_head_lines,v_file_name] = F_sl_func_tpl(v_function_name)">F_sl_func_tpl</a>(v_function_name);
+0078     <span class="comment">%</span>
+0079     v_file_path=fullfile(v_file_dir,v_file_name);
+0080     <span class="comment">% appel du generateur de fichier (+enregistrement et ou edition)</span>
+0081     <span class="keyword">try</span>
+0082         <a href="F_sl_gen_file.html" class="code" title="function F_sl_gen_file(v_file_lines,v_file_path,v_save,v_edit,varargin)">F_sl_gen_file</a>(v_head_lines,v_file_path,v_save,1);
+0083     <span class="keyword">catch</span>
+0084         error(<span class="string">'Le fichier %s n''a pas pu etre cree'</span>,v_file_path);
+0085     <span class="keyword">end</span>
+0086 <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

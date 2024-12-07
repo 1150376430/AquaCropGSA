@@ -1,0 +1,13 @@
+The events of XTS irrigation schedule 
+   4.0   : AquaCrop Version (June 2012)
+   1     : Sprinkler irrigation
+ 100     : Percentage of soil surface wetted by irrigation
+   1     : Irrigation schedule
+
+   Day    Depth (mm)   ECw (dS/m)
+====================================
+    63        90          0.0
+   180        60          0.0
+   194        90          0.0
+   216        90          0.0
+   240       135          0.0

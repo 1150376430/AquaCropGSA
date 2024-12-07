@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_gen_matindex_vs</title>
+  <meta name="keywords" content="F_gen_matindex_vs">
+  <meta name="description" content="Association entre l'ordre des indices v_S et numero des facteurs impliques">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Tools -->
+<h1>F_gen_matindex_vs
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Association entre l'ordre des indices v_S et numero des facteurs impliques</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function v_M = F_gen_matindex_vs(v_p) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Association entre l'ordre des indices v_S et numero des facteurs impliques
+
+ Creation de la matrice dont chaque ligne i definit 
+ le(s) numero(s) du(des) facteur(s) impliques dans le calcul de l'indice 
+ de sensibilite v_S(i). 
+  
+   ENTREE(S): 
+      - v_p : 
+         scalaire entier contenant le nombre de facteurs variants du
+         modele a analyser
+  
+   SORTIE(S): 
+      - v_M : 
+         matrice de type entier (0 ou 1), de taille (2^v_p,v_p),
+         contenant pour chaque ligne le(s) numero(s) du(des) facteur(s) 
+         impliques dans le calcul de l'indice de sensibilite v_S(i) (en fait, 
+         ce numero est celui de la (des) colonne(s) contenant un 1. 
+         Ne pas utiliser la premiere ligne qui est systematiquement nulle.
+  
+   EXEMPLE(S): cas d'utilisation de la fonction
+    &gt;&gt; F_gen_matindex_vs(3)
+    ans = 
+         0     0     0
+         0     0     1
+         0     1     0
+         0     1     1
+         1     0     0
+         1     0     1
+         1     1     0
+         1     1     1
+    Donc pour 3 parametres variants :
+       v_S(1)=S3
+       v_S(2)=S2  
+       v_S(3)=S23  
+       v_S(4)=S1  
+       v_S(5)=S13  
+       v_S(6)=S12  
+       v_S(7)=S123  
+
+
+  AUTEUR(S): S. Buis
+  DATE: 31-Aug-2007
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="../Models/F_indices_g_function.html" class="code" title="function[v_indlist,v_S,v_ST]=F_indices_g_function(v_a)">F_indices_g_function</a>	Indices de sensibilite theoriques de la fonction g de Sobol'</li></ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function v_M = F_gen_matindex_vs(v_p)</a>
+0002 <span class="comment">% Association entre l'ordre des indices v_S et numero des facteurs impliques</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Creation de la matrice dont chaque ligne i definit</span>
+0005 <span class="comment">% le(s) numero(s) du(des) facteur(s) impliques dans le calcul de l'indice</span>
+0006 <span class="comment">% de sensibilite v_S(i).</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   ENTREE(S):</span>
+0009 <span class="comment">%      - v_p :</span>
+0010 <span class="comment">%         scalaire entier contenant le nombre de facteurs variants du</span>
+0011 <span class="comment">%         modele a analyser</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   SORTIE(S):</span>
+0014 <span class="comment">%      - v_M :</span>
+0015 <span class="comment">%         matrice de type entier (0 ou 1), de taille (2^v_p,v_p),</span>
+0016 <span class="comment">%         contenant pour chaque ligne le(s) numero(s) du(des) facteur(s)</span>
+0017 <span class="comment">%         impliques dans le calcul de l'indice de sensibilite v_S(i) (en fait,</span>
+0018 <span class="comment">%         ce numero est celui de la (des) colonne(s) contenant un 1.</span>
+0019 <span class="comment">%         Ne pas utiliser la premiere ligne qui est systematiquement nulle.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   EXEMPLE(S): cas d'utilisation de la fonction</span>
+0022 <span class="comment">%    &gt;&gt; F_gen_matindex_vs(3)</span>
+0023 <span class="comment">%    ans =</span>
+0024 <span class="comment">%         0     0     0</span>
+0025 <span class="comment">%         0     0     1</span>
+0026 <span class="comment">%         0     1     0</span>
+0027 <span class="comment">%         0     1     1</span>
+0028 <span class="comment">%         1     0     0</span>
+0029 <span class="comment">%         1     0     1</span>
+0030 <span class="comment">%         1     1     0</span>
+0031 <span class="comment">%         1     1     1</span>
+0032 <span class="comment">%    Donc pour 3 parametres variants :</span>
+0033 <span class="comment">%       v_S(1)=S3</span>
+0034 <span class="comment">%       v_S(2)=S2</span>
+0035 <span class="comment">%       v_S(3)=S23</span>
+0036 <span class="comment">%       v_S(4)=S1</span>
+0037 <span class="comment">%       v_S(5)=S13</span>
+0038 <span class="comment">%       v_S(6)=S12</span>
+0039 <span class="comment">%       v_S(7)=S123</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%  AUTEUR(S): S. Buis</span>
+0043 <span class="comment">%  DATE: 31-Aug-2007</span>
+0044 <span class="comment">%  VERSION: 0</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0047 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0048 <span class="comment">%    $Author: plecharpent $</span>
+0049 <span class="comment">%    $Revision: 40 $</span>
+0050 <span class="comment">%</span>
+0051 <span class="comment">%</span>
+0052 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0053     <span class="keyword">if</span> v_p&lt;15
+0054         v_N=2^v_p;
+0055         v_M=zeros(v_N,v_p);
+0056         <span class="keyword">for</span> v_k=1:v_p
+0057             v_v=[ zeros(2^(v_k-1),1) ; ones(2^(v_k-1),1) ];
+0058             v_M(:,v_p-v_k+1)=repmat(v_v,2^(v_p-v_k),1);
+0059         <span class="keyword">end</span>
+0060     <span class="keyword">else</span>
+0061         <span class="comment">%matrice identite</span>
+0062         v_M=[zeros(1,v_p) ; eye(v_p)];
+0063     <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

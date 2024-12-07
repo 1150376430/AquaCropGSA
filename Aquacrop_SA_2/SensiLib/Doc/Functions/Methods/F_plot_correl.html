@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_plot_correl</title>
+  <meta name="keywords" content="F_plot_correl">
+  <meta name="description" content="Trace des histogrammes des parametres et des nuages de points des parametres">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Methods -->
+<h1>F_plot_correl
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Trace des histogrammes des parametres et des nuages de points des parametres</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [v_corrcoef,v_p_values]=F_plot_correl(v_mat_variant,vc_parname) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Trace des histogrammes des parametres et des nuages de points des parametres 
+ les uns en fonction des autres ainsi que des valeurs de leur correlations.
+
+ ENTREES :
+       - v_mat_variant : 
+          matrice de type flottant de taille : 
+             ne de simulations * ne de parametres variant
+          contenant l'echantillon de valeurs des parametres 
+
+       - vc_parname : 
+          cell e 1 dimension de taille : ne de parametres
+          contenant le nom des differents parametres.
+
+ SORTIE :
+       - v_corrcoef : matrice des correlations entre parametres
+
+       - v_p_values : p-values associees aux correlations (chaque p-value 
+         est la probabilite d'avoir une correlation aussi grande avec 
+         des observations aleatoires theoriquement independantes). 
+
+       Figures
+
+
+
+ CONTENU :
+
+ AUTEUR : S. BUIS
+ DATE : 05-mars-2010
+ VERSION : 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v_corrcoef,v_p_values]=F_plot_correl(v_mat_variant,vc_parname)</a>
+0002 <span class="comment">% Trace des histogrammes des parametres et des nuages de points des parametres</span>
+0003 <span class="comment">% les uns en fonction des autres ainsi que des valeurs de leur correlations.</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">% ENTREES :</span>
+0006 <span class="comment">%       - v_mat_variant :</span>
+0007 <span class="comment">%          matrice de type flottant de taille :</span>
+0008 <span class="comment">%             ne de simulations * ne de parametres variant</span>
+0009 <span class="comment">%          contenant l'echantillon de valeurs des parametres</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%       - vc_parname :</span>
+0012 <span class="comment">%          cell e 1 dimension de taille : ne de parametres</span>
+0013 <span class="comment">%          contenant le nom des differents parametres.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% SORTIE :</span>
+0016 <span class="comment">%       - v_corrcoef : matrice des correlations entre parametres</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%       - v_p_values : p-values associees aux correlations (chaque p-value</span>
+0019 <span class="comment">%         est la probabilite d'avoir une correlation aussi grande avec</span>
+0020 <span class="comment">%         des observations aleatoires theoriquement independantes).</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%       Figures</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% CONTENU :</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">% AUTEUR : S. BUIS</span>
+0029 <span class="comment">% DATE : 05-mars-2010</span>
+0030 <span class="comment">% VERSION : 0</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0033 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0034 <span class="comment">%    $Author: plecharpent $</span>
+0035 <span class="comment">%    $Revision: 40 $</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0038 
+0039 v_nb_par=length(vc_parname);
+0040 
+0041 figure
+0042 subplot(1,2,1)
+0043 tmp=zeros(v_nb_par+1,v_nb_par+1);
+0044 v_p=zeros(v_nb_par+1,v_nb_par+1);
+0045 [tmp(1:v_nb_par,1:v_nb_par),v_p(1:v_nb_par,1:v_nb_par)]=corrcoef(v_mat_variant);
+0046 pcolor(tmp)
+0047 set(gca,<span class="string">'XTick'</span>,1.5:v_nb_par+0.5)
+0048 set(gca,<span class="string">'XTickLabel'</span>,vc_parname)
+0049 set(gca,<span class="string">'YTick'</span>,1.5:v_nb_par+0.5)
+0050 set(gca,<span class="string">'YTickLabel'</span>,vc_parname)
+0051 colorbar
+0052 title(<span class="string">'Correlations entre les parametres'</span>)
+0053 subplot(1,2,2)
+0054 pcolor(v_p)
+0055 set(gca,<span class="string">'XTick'</span>,1.5:v_nb_par+0.5)
+0056 set(gca,<span class="string">'XTickLabel'</span>,vc_parname)
+0057 set(gca,<span class="string">'YTick'</span>,1.5:v_nb_par+0.5)
+0058 set(gca,<span class="string">'YTickLabel'</span>,vc_parname)
+0059 colorbar
+0060 title(<span class="string">'p-value associees'</span>)
+0061 v_corrcoef=tmp(1:v_nb_par,1:v_nb_par);
+0062 v_p_values=v_p(1:v_nb_par,1:v_nb_par);
+0063 
+0064 figure
+0065 [H,AX] = plotmatrix(v_mat_variant);
+0066 <span class="keyword">for</span> i=1:v_nb_par
+0067     title(AX(1,i),vc_parname{i})
+0068     ylabel(AX(i,1),vc_parname{i})
+0069 <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

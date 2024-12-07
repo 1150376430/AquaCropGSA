@@ -1,0 +1,11 @@
+treshold=0.2;
+ll=length( vs_indices.vm_mu_star(:,1));
+Results(1:ll)=0;
+for i=1:ll
+    if vs_indices.vm_mu_star(i,1)>treshold
+ Results(i)=find(vs_indices.vm_mu_star(:,1)==ord(i));
+    end
+ 
+end
+
+Results=sort(Results)';

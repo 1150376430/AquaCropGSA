@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_g_function</title>
+  <meta name="keywords" content="F_g_function">
+  <meta name="description" content="Fonction g de Sobol'">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Models -->
+<h1>F_g_function
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Fonction g de Sobol'</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function v_y=F_g_function(v_x,v_a) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Fonction g de Sobol'
+
+ Fonction qui calcule les valeurs de la fonction g de Sobol'
+ (cf. doc sur les modeles tests) pour plusieurs jeux de valeurs des
+ parametres x1, x2, ..., xN
+
+   ENTREE(S): descriptif des arguments d'entree
+      - v_x : 
+         matrice de type reel de taille (nombre de jeux de valeurs
+         des parametres x, nombre de parametres x), qui contient les jeux 
+         de valeurs des parametres xi sur lesquels appliquer la fonction g.
+
+      - v_a : 
+         vecteur de type reel de taille (nombre de parametres x)
+         contenant les valeurs des parametres ai qui definissent la
+         fonction g. 
+
+
+   SORTIE(S): descriptif des arguments de sortie
+      - v_y : 
+         vecteur de type reel de taille (nombre de jeux de valeurs
+         des parametres x) qui contient les valeurs de la fonction g
+         obtenue a partir des jeux de valeurs des parametres xi definis
+         dans v_x. 
+  
+   CONTENU: 
+      - calcul du nombre de parametres et verification de la taille de v_a
+      - calcul de v_y
+  
+  
+  AUTEUR(S): S. Buis
+  DATE: 31-Aug-2007
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="../Demo/F_AS_demo.html" class="code" title="function [vs_indices,v_out_mat,v_in_mat]= F_AS_demo(v_lib_dir)">F_AS_demo</a>	Test des méthodes d'analyse de sensibilité.</li></ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function v_y=F_g_function(v_x,v_a)</a>
+0002 <span class="comment">% Fonction g de Sobol'</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Fonction qui calcule les valeurs de la fonction g de Sobol'</span>
+0005 <span class="comment">% (cf. doc sur les modeles tests) pour plusieurs jeux de valeurs des</span>
+0006 <span class="comment">% parametres x1, x2, ..., xN</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   ENTREE(S): descriptif des arguments d'entree</span>
+0009 <span class="comment">%      - v_x :</span>
+0010 <span class="comment">%         matrice de type reel de taille (nombre de jeux de valeurs</span>
+0011 <span class="comment">%         des parametres x, nombre de parametres x), qui contient les jeux</span>
+0012 <span class="comment">%         de valeurs des parametres xi sur lesquels appliquer la fonction g.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%      - v_a :</span>
+0015 <span class="comment">%         vecteur de type reel de taille (nombre de parametres x)</span>
+0016 <span class="comment">%         contenant les valeurs des parametres ai qui definissent la</span>
+0017 <span class="comment">%         fonction g.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   SORTIE(S): descriptif des arguments de sortie</span>
+0021 <span class="comment">%      - v_y :</span>
+0022 <span class="comment">%         vecteur de type reel de taille (nombre de jeux de valeurs</span>
+0023 <span class="comment">%         des parametres x) qui contient les valeurs de la fonction g</span>
+0024 <span class="comment">%         obtenue a partir des jeux de valeurs des parametres xi definis</span>
+0025 <span class="comment">%         dans v_x.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   CONTENU:</span>
+0028 <span class="comment">%      - calcul du nombre de parametres et verification de la taille de v_a</span>
+0029 <span class="comment">%      - calcul de v_y</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%  AUTEUR(S): S. Buis</span>
+0033 <span class="comment">%  DATE: 31-Aug-2007</span>
+0034 <span class="comment">%  VERSION: 0</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0037 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0038 <span class="comment">%    $Author: plecharpent $</span>
+0039 <span class="comment">%    $Revision: 40 $</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0043 
+0044 <span class="comment">% Calcul du nombre de parametres et verification de la taille de v_a</span>
+0045     v_k=size(v_x,2);    
+0046     <span class="keyword">if</span> (v_k~=size(v_a)) 
+0047         error([<span class="string">'Les coefficients de la fonction g n''ont pas ete defini pour un nombre de parametre egal a '</span> int2str(v_k)]);
+0048     <span class="keyword">end</span> 
+0049     
+0050 <span class="comment">% Calcul de v_y</span>
+0051     v_y=1;
+0052     <span class="keyword">for</span> j=1:v_k
+0053         v_y=v_y.*(abs(4.*v_x(:,j)-2)+v_a(j))/(1+v_a(j));
+0054     <span class="keyword">end</span>
+0055     
+0056 <span class="keyword">return</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

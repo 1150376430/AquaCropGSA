@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_Fang</title>
+  <meta name="keywords" content="F_Fang">
+  <meta name="description" content="Modele test utilise dans Fang et al 2003, "Improved generalized Fourier">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Models -->
+<h1>F_Fang
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Modele test utilise dans Fang et al 2003, "Improved generalized Fourier</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function[v_y]=F_Fang(v_x) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Modele test utilise dans Fang et al 2003, &quot;Improved generalized Fourier
+ amplitude sensitivity test (FAST) for model assessment&quot;
+
+
+   ENTREE(S): descriptif des arguments d'entree
+      - v_x : 
+         matrice de type reel de taille (nombre de jeux de valeurs
+         des parametres x, nombre de parametres x), qui contient les jeux
+         de valeurs des parametres xi sur lesquels appliquer la fonction
+  
+
+   SORTIE(S): descriptif des arguments de sortie
+      - v_y : 
+         vecteur de type reel de taille (nombre de jeux de valeurs
+         des parametres x) qui contient les valeurs de la fonction 
+         obtenue a partir des jeux de valeurs des parametres xi definis dans
+         v_x. 
+  
+   CONTENU: 
+  
+  AUTEUR(S): S. Buis
+  DATE: 02-Juil-2010
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function[v_y]=F_Fang(v_x)</a>
+0002 <span class="comment">% Modele test utilise dans Fang et al 2003, &quot;Improved generalized Fourier</span>
+0003 <span class="comment">% amplitude sensitivity test (FAST) for model assessment&quot;</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   ENTREE(S): descriptif des arguments d'entree</span>
+0007 <span class="comment">%      - v_x :</span>
+0008 <span class="comment">%         matrice de type reel de taille (nombre de jeux de valeurs</span>
+0009 <span class="comment">%         des parametres x, nombre de parametres x), qui contient les jeux</span>
+0010 <span class="comment">%         de valeurs des parametres xi sur lesquels appliquer la fonction</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   SORTIE(S): descriptif des arguments de sortie</span>
+0014 <span class="comment">%      - v_y :</span>
+0015 <span class="comment">%         vecteur de type reel de taille (nombre de jeux de valeurs</span>
+0016 <span class="comment">%         des parametres x) qui contient les valeurs de la fonction</span>
+0017 <span class="comment">%         obtenue a partir des jeux de valeurs des parametres xi definis dans</span>
+0018 <span class="comment">%         v_x.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   CONTENU:</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%  AUTEUR(S): S. Buis</span>
+0023 <span class="comment">%  DATE: 02-Juil-2010</span>
+0024 <span class="comment">%  VERSION: 0</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0027 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0028 <span class="comment">%    $Author: plecharpent $</span>
+0029 <span class="comment">%    $Revision: 40 $</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0033     
+0034     v_y=sum(v_x,2);
+0035     
+0036 <span class="keyword">return</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

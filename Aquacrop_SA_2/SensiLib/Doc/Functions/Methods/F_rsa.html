@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_rsa</title>
+  <meta name="keywords" content="F_rsa">
+  <meta name="description" content="Fonction pour l'analyse de sensibilite regionale : calcul du critere">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Methods -->
+<h1>F_rsa
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Fonction pour l'analyse de sensibilite regionale : calcul du critere</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [v_h,v_p,v_ks2stat] = F_rsa(v_mat_variant1,v_mat_variant2,varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Fonction pour l'analyse de sensibilite regionale : calcul du critere
+ statistique et trace de graphiques.
+
+   ENTREES :
+       - v_mat_variant1 : 
+          matrice de type flottant de taille : 
+             N1 * no de parametres variant
+          contenant l'echantillon filtre de valeurs des parametres 
+       - v_mat_variant2 : 
+          matrice de type flottant de taille : 
+             N2 * no de parametres variant
+          contenant l'echantillon complementaire de valeurs des parametres 
+       - vc_parname (OPTIONNEL): 
+          cell a 1 dimension de taille : no de parametres
+          contenant le nom des differents parametres a imprimer sur les graphiques 
+          (x1,x2,... par defaut si cet argument n'est pas fourni)
+       
+   SORTIES :
+       - v_h : vecteur de type flottant de taille le nombre de parametres 
+          contenant les resultats du test de Kolmogorov-Smirnov pour les
+          differents parametres (1 si la distribution du premier
+          echantillon est significativement differente de celle du
+          deuxieme echantillon)
+       - v_p : vecteur de type flottant de taille le nombre de parametres 
+          contenant les p-value pour chaque parametre (plus petit niveau pour 
+          lequel on rejette l'hypothese d'egalite entre les distributions)
+       - v_ks2stat : vecteur de type flottant de taille le nombre de parametres 
+          contenant les valeurs de la statistique du test (max(|F1(x)-F2(x)|) 
+          pour chaque parametre.
+
+       + trace des graphiques des fonctions de distribution cumulatives des 
+         deux echantillons pour chaque parametre. 
+
+   AUTEUR : S. BUIS
+   DATE : 12-mai-2010
+   VERSION : 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-10-23 16:17:24 +0200 (mer., 23 oct. 2013) $
+    $Author: sbuis $
+    $Revision: 73 $
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v_h,v_p,v_ks2stat] = F_rsa(v_mat_variant1,v_mat_variant2,varargin)</a>
+0002 <span class="comment">% Fonction pour l'analyse de sensibilite regionale : calcul du critere</span>
+0003 <span class="comment">% statistique et trace de graphiques.</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%   ENTREES :</span>
+0006 <span class="comment">%       - v_mat_variant1 :</span>
+0007 <span class="comment">%          matrice de type flottant de taille :</span>
+0008 <span class="comment">%             N1 * no de parametres variant</span>
+0009 <span class="comment">%          contenant l'echantillon filtre de valeurs des parametres</span>
+0010 <span class="comment">%       - v_mat_variant2 :</span>
+0011 <span class="comment">%          matrice de type flottant de taille :</span>
+0012 <span class="comment">%             N2 * no de parametres variant</span>
+0013 <span class="comment">%          contenant l'echantillon complementaire de valeurs des parametres</span>
+0014 <span class="comment">%       - vc_parname (OPTIONNEL):</span>
+0015 <span class="comment">%          cell a 1 dimension de taille : no de parametres</span>
+0016 <span class="comment">%          contenant le nom des differents parametres a imprimer sur les graphiques</span>
+0017 <span class="comment">%          (x1,x2,... par defaut si cet argument n'est pas fourni)</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   SORTIES :</span>
+0020 <span class="comment">%       - v_h : vecteur de type flottant de taille le nombre de parametres</span>
+0021 <span class="comment">%          contenant les resultats du test de Kolmogorov-Smirnov pour les</span>
+0022 <span class="comment">%          differents parametres (1 si la distribution du premier</span>
+0023 <span class="comment">%          echantillon est significativement differente de celle du</span>
+0024 <span class="comment">%          deuxieme echantillon)</span>
+0025 <span class="comment">%       - v_p : vecteur de type flottant de taille le nombre de parametres</span>
+0026 <span class="comment">%          contenant les p-value pour chaque parametre (plus petit niveau pour</span>
+0027 <span class="comment">%          lequel on rejette l'hypothese d'egalite entre les distributions)</span>
+0028 <span class="comment">%       - v_ks2stat : vecteur de type flottant de taille le nombre de parametres</span>
+0029 <span class="comment">%          contenant les valeurs de la statistique du test (max(|F1(x)-F2(x)|)</span>
+0030 <span class="comment">%          pour chaque parametre.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%       + trace des graphiques des fonctions de distribution cumulatives des</span>
+0033 <span class="comment">%         deux echantillons pour chaque parametre.</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   AUTEUR : S. BUIS</span>
+0036 <span class="comment">%   DATE : 12-mai-2010</span>
+0037 <span class="comment">%   VERSION : 0</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0040 <span class="comment">%    $Date: 2013-10-23 16:17:24 +0200 (mer., 23 oct. 2013) $</span>
+0041 <span class="comment">%    $Author: sbuis $</span>
+0042 <span class="comment">%    $Revision: 73 $</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0045 
+0046 v_nb_par=size(v_mat_variant1,2);
+0047 v_nb_maxcol=5;
+0048 v_nb_maxrow=5;
+0049 v_nb_fig_max=v_nb_maxcol*v_nb_maxrow;
+0050 
+0051 <span class="keyword">if</span> (length(varargin)==0) || isempty(varargin{1})
+0052     <span class="keyword">for</span> i=1:v_nb_par
+0053         vc_parname{i}=[<span class="string">'x'</span> num2str(i)];
+0054     <span class="keyword">end</span>
+0055 <span class="keyword">else</span>
+0056     vc_parname=varargin{1};
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="keyword">for</span> i=1:v_nb_par
+0060 
+0061     <span class="comment">% Realise le test de Kolmogorov-Smirnov</span>
+0062     [v_h(i),v_p(i),v_ks2stat(i)] = kstest2(v_mat_variant1(:,i),v_mat_variant2(:,i));
+0063 
+0064 <span class="keyword">end</span>
+0065 
+0066 [v_ks2statSort,isort]=sort(v_ks2stat,2,<span class="string">'descend'</span>);
+0067 figure
+0068 j=1;
+0069 v_S=zeros(v_nb_par,1);
+0070 <span class="keyword">for</span> i=1:v_nb_par
+0071     <span class="keyword">if</span> (j&gt;v_nb_fig_max) 
+0072         figure
+0073         j=1;
+0074     <span class="keyword">end</span>
+0075     subplot(min(ceil(sqrt(v_nb_par)),v_nb_maxrow),min(ceil(v_nb_par/ceil(sqrt(v_nb_par))),v_nb_maxcol),j)
+0076     handle1 = cdfplot(v_mat_variant1(:,isort(i)));
+0077     set(handle1,<span class="string">'LineStyle'</span>,<span class="string">':'</span>)
+0078     hold on
+0079     handle2 = cdfplot(v_mat_variant2(:,isort(i)));
+0080     set(handle2,<span class="string">'LineStyle'</span>,<span class="string">'-.'</span>)
+0081     handle3 = cdfplot([v_mat_variant1(:,isort(i));v_mat_variant2(:,isort(i))]);
+0082     legend([handle1 handle2 handle3],<span class="string">'F1(x)'</span>,<span class="string">'F2(x)'</span>,<span class="string">'F(x)'</span>,<span class="string">'Location'</span>,<span class="string">'SW'</span>)
+0083     title(strcat(vc_parname{isort(i)},<span class="string">' - \alpha='</span>,num2str(v_p(isort(i))),<span class="string">' - d_{m,n}='</span>,num2str(v_ks2stat(isort(i)))))
+0084     j=j+1;
+0085 <span class="keyword">end</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

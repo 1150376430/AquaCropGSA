@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_sl_gen_file</title>
+  <meta name="keywords" content="F_sl_gen_file">
+  <meta name="description" content="Creation et edition d'un fichier">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Tools -->
+<h1>F_sl_gen_file
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Creation et edition d'un fichier</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function F_sl_gen_file(v_file_lines,v_file_path,v_save,v_edit,varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Creation et edition d'un fichier  
+  
+   ENTREE(S): 
+      - v_file_lines : lignes du fichier (cell de string)
+      - v_file_path : chemin du fichier
+      - v_save : 1 (=ecriture du fichier), 0 (sinon)
+      - v_edit : 1 edition, 0 pas edition
+  
+   SORTIE(S): 
+      - pas d'argument de sortie
+  
+   CONTENU: 
+      - Creation d'un fichier, enregistrement et/ou edition dans l'editeur
+      Matlab
+
+   APPEL(S): 
+      - com.mathworks.mlservices.MLEditorServices.openDocument
+      - com.mathworks.mlservices.MLEditorServices.newDocument
+      * depuis la version MATLAB Version 7.12 (R2011a) 09-Mar-2011
+  
+      - matlab.desktop.editor.openDocument
+      - matlab.desktop.editor.newDocument
+  
+   EXEMPLE(S): cas d'utilisation de la fonction
+      - F_sl_gen_file(lignes,'c:\dir\nom_fonction.m',1,0)
+      - F_sl_gen_file(lignes,'c:\dir',0,1)
+  
+  AUTEUR(S): P. Lecharpentier
+  DATE: 27-Nov-2006
+  VERSION: 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-05-07 15:31:25 +0200 (mar., 07 mai 2013) $
+    $Author: plecharpent $
+    $Revision: 39 $
+  
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="F_sl_new_func.html" class="code" title="function F_sl_new_func(varargin)">F_sl_new_func</a>	F_SL_NEW_FUNC Cree un nouveau fichier M-File dans l'editeur Matlab</li></ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function F_sl_gen_file(v_file_lines,v_file_path,v_save,v_edit,varargin)</a>
+0002 <span class="comment">% Creation et edition d'un fichier</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ENTREE(S):</span>
+0005 <span class="comment">%      - v_file_lines : lignes du fichier (cell de string)</span>
+0006 <span class="comment">%      - v_file_path : chemin du fichier</span>
+0007 <span class="comment">%      - v_save : 1 (=ecriture du fichier), 0 (sinon)</span>
+0008 <span class="comment">%      - v_edit : 1 edition, 0 pas edition</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   SORTIE(S):</span>
+0011 <span class="comment">%      - pas d'argument de sortie</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   CONTENU:</span>
+0014 <span class="comment">%      - Creation d'un fichier, enregistrement et/ou edition dans l'editeur</span>
+0015 <span class="comment">%      Matlab</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   APPEL(S):</span>
+0018 <span class="comment">%      - com.mathworks.mlservices.MLEditorServices.openDocument</span>
+0019 <span class="comment">%      - com.mathworks.mlservices.MLEditorServices.newDocument</span>
+0020 <span class="comment">%      * depuis la version MATLAB Version 7.12 (R2011a) 09-Mar-2011</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%      - matlab.desktop.editor.openDocument</span>
+0023 <span class="comment">%      - matlab.desktop.editor.newDocument</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   EXEMPLE(S): cas d'utilisation de la fonction</span>
+0026 <span class="comment">%      - F_sl_gen_file(lignes,'c:\dir\nom_fonction.m',1,0)</span>
+0027 <span class="comment">%      - F_sl_gen_file(lignes,'c:\dir',0,1)</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%  AUTEUR(S): P. Lecharpentier</span>
+0030 <span class="comment">%  DATE: 27-Nov-2006</span>
+0031 <span class="comment">%  VERSION: 0</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0034 <span class="comment">%    $Date: 2013-05-07 15:31:25 +0200 (mar., 07 mai 2013) $</span>
+0035 <span class="comment">%    $Author: plecharpent $</span>
+0036 <span class="comment">%    $Revision: 39 $</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0040 
+0041 <span class="keyword">if</span> nargin&lt;3
+0042     error(<span class="string">'Pas assez d''argument...'</span>);
+0043 <span class="keyword">end</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">% Gestion compatibilite entre versions</span>
+0046 <span class="comment">% a partir de la version MATLAB Version 7.12 (R2011a) 09-Mar-2011</span>
+0047 <span class="comment">% changement acces aux services editeur</span>
+0048 new_edt=datenum(version(<span class="string">'-date'</span>))&gt;=datenum(<span class="string">'09-Mar-2011'</span>);
+0049 
+0050 <span class="keyword">if</span> v_save
+0051     <span class="comment">% create the file in the current or specified (v_file_dir) directory if it doesn't exist</span>
+0052     <span class="keyword">if</span> ~exist(v_file_path,<span class="string">'file'</span>)
+0053         <span class="keyword">try</span>
+0054             v_fid=fopen(v_file_path,<span class="string">'w'</span>);
+0055             fprintf(v_fid,<span class="string">'%s\n'</span>,v_file_lines{:});
+0056             fclose(v_fid);
+0057         <span class="keyword">catch</span>
+0058             fprintf(<span class="string">'Erreur lors de la creation du fichier %s'</span>,v_file_path);
+0059         <span class="keyword">end</span>
+0060         <span class="keyword">if</span> v_edit
+0061             <span class="keyword">switch</span>  new_edt
+0062                 <span class="keyword">case</span> true
+0063                     matlab.desktop.editor.openDocument(v_file_path);
+0064                 <span class="keyword">case</span> false
+0065                     com.mathworks.mlservices.MLEditorServices.openDocument(v_file_path);
+0066             <span class="keyword">end</span>
+0067         <span class="keyword">end</span>    
+0068     <span class="keyword">else</span>
+0069         fprintf(<span class="string">'Attention le fichier %s existe deja  !!!\nOuverture de l''editeur...'</span>,v_file_path);
+0070         fprintf(<span class="string">'\n&lt;a href=&quot;.&quot;&gt;Appuyer sur &quot;Entree&quot; pour continuer&lt;/a&gt;'</span>);
+0071         pause;
+0072         [v_status, v_result]=system([v_edit_progs.(varargin{1}).path <span class="string">' '</span> v_file_path <span class="string">' &amp;'</span>]);
+0073         <span class="keyword">if</span> v_status
+0074             open(v_file_path);
+0075         <span class="keyword">end</span>
+0076     <span class="keyword">end</span>
+0077 <span class="keyword">else</span>
+0078     <span class="comment">% put the code into a new Editor buffer, file is not saved</span>
+0079     text=sprintf(<span class="string">'%s\n'</span>,v_file_lines{:}) ;
+0080     <span class="keyword">switch</span>  new_edt
+0081         <span class="keyword">case</span> true
+0082             matlab.desktop.editor.newDocument(text);
+0083         <span class="keyword">case</span> false
+0084             com.mathworks.mlservices.MLEditorServices.newDocument(text);
+0085     <span class="keyword">end</span>
+0086 <span class="keyword">end</span>
+0087</pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

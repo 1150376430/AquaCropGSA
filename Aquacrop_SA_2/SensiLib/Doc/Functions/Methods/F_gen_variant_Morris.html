@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_gen_variant_Morris</title>
+  <meta name="keywords" content="F_gen_variant_Morris">
+  <meta name="description" content="Generation des variants pour la methode de Morris.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Methods -->
+<h1>F_gen_variant_Morris
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Generation des variants pour la methode de Morris.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function vm_in_mat = F_gen_variant_Morris(vs_factors_def,vs_method_options) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Generation des variants pour la methode de Morris.
+
+ Cette fonction sert a generer un echantillon pour le calcul des indices 
+ principaux et totaux avec la methode de Morris. Cette methode est
+ decrite en detail dans le document &quot;La Methode de Morris et ses extensions&quot;
+ qui servira de reference dans les commentaires suivants (notamment pour 
+ les formules utilisees).
+
+
+ ENTREES :
+
+      - vs_factors_def : structure de definition des facteurs
+          o vs_factors_def.Dist (OPTIONNEL) : vecteur de cell contenant le type de distribution pour
+            chaque facteur.
+            Pour voir la liste des distributions disponibles, executer la
+            fonction F_create_sample() sans argument.
+            ATTENTION: pour utiliser des lois autres que les lois uniforme et 
+            triangulaire il est necessaire d'avoir la toolbox matlab &quot;statistics&quot;.
+            ATTENTION: la methode ne fonctionne pas avec la distribution
+            'discrete'.
+            Si ce champ n'est pas precise ou est vide, les distributions des facteurs seront toutes fixees e
+            'uniform'. 
+            Si le vecteur ne contient qu'une seule distribution alors tous les facteurs auront
+            la distribution donnee.
+            Dans ces deux derniers cas le champ Nb devra etre
+            precise (cf. ci-apres).
+          o vs_factors_def.DistParams (OPTIONNEL) : vecteur de cell
+            contenant le vecteur des parametres de la distribution 
+            pour chaque facteur. 
+            Pour voir la liste des parametres requis pour chaque distribution
+            disponible, executer la fonction F_create_sample() sans argument.
+            Si ce champ n'est pas fourni ou est vide, les parametres
+            seront fixes a 0 et 1.
+            Si ce champ ne contient qu'un vecteur de parametre, ces
+            parametres seront utilises pour toutes les distributions.
+          o vs_factors_def.Nb (OPTIONNEL) : scalaire contenant le
+            nombre de facteurs. Obligatoire si le champ Dist n'est pas
+            precise, est vide ou ne contient qu'une seule distribution. 
+
+      - vs_method_options : structure de definition des options de la
+        methode
+          o vs_method_options.p : nombre de niveaux de la grille régulière.
+            Type : scalaire si tous les facteurs ont le même nombre de
+            niveaux, vecteur de taille le n° de facteurs si le nombre de 
+            niveaux est différent selon les facteurs.
+          o vs_method_options.n : (OPTIONNEL) rapport delta/taille d'un pas.
+            (taille valant 1/(p-1)) ATTENTION :
+            NE PEUT PAS ETRE SUPERIEUR OU EGAL A  p. 
+            Valeur par défaut : 2.
+            Type : scalaire si une seule valeur pour tous les facteurs,
+            vecteur de taille le n° de facteurs si valeurs différentes
+            selon les facteurs.
+          o vs_method_options.r : nombre de trajectoires (type : scalaire)
+          o vs_method_options.Q : (OPTIONNEL) nombre de groupe de r trajectoires sur lesquels s'effectue la
+            sélection des r trajectoires (type : scalaire). Valeur par
+            défaut : 100.
+          o vs_method_options.incert : (OPTIONNEL) methode d'estimation des
+          incertitudes sur les indices calculés : 'bootstrap' (par
+          bootstrap, i.e. par ré-échantillonnage de m groupes de trajectoires 
+          parmi les r  -&gt; r*(k+1) simulations du modèle), ou 'réplication'
+          (par réplication, i.e. qu'on répète m fois le plan d'expérience
+          de r trajectoires -&gt; r*(k+1)*m simulations du modèle).
+          Valeur par défaut : bootstrap.
+          o vs_method_options.m : (OPTIONNEL) nombre de
+            ré-échantillonnage boostrap ou nombre de réplicats de groupes de r 
+            trajectoires contenus dans la matrice en sortie ou  (selon valeur de vs_method_options.incert).
+            Valeur par défaut : r si bootstrap, 5 si réplication.
+
+   SORTIE(S): descriptif des arguments de sortie
+      - v_in_mat : le groupe de r trajectoires de distance interne
+      maximale (type : matrice de taille (r*(k+1),k)
+  
+   CONTENU: descriptif de la fonction
+      - sélection d'un groupe de r trajectoires de distance interne maximale parmi 
+        Q groupes de r trajectoires
+     
+  AUTEUR(S): Cyril AUCLAIR (stagiaire de Samuel BUIS à l'INRA PACA mai-septembre 2013)
+  DATE CREATION: 13-Jun-2013
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="../Demo/F_AS_demo.html" class="code" title="function [vs_indices,v_out_mat,v_in_mat]= F_AS_demo(v_lib_dir)">F_AS_demo</a>	Test des méthodes d'analyse de sensibilité.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SOUS-FONCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [vc_selecTraj,v_distance] = F_SelecTrajEtCalculDist(k,p,n,r)</a></li><li><a href="#_sub2" class="code">function v_g=F_d(vm_Btmp_starI,vm_Btmp_starJ)</a></li><li><a href="#_sub3" class="code">function vc_g=F_SelectionTrajectoires(k, p,n, r)</a></li><li><a href="#_sub4" class="code">function vm_Btmp_star=F_Btmp_star(k,p,n)</a></li><li><a href="#_sub5" class="code">function vv_x_star=F_x_star(k,p,n)</a></li><li><a href="#_sub6" class="code">function vm_B=F_B(k)</a></li><li><a href="#_sub7" class="code">function vm_J=F_J(n1,n2)</a></li><li><a href="#_sub8" class="code">function vm_D_star=F_D_star(k)</a></li><li><a href="#_sub9" class="code">function vm_P_star=F_P_star(k)</a></li></ul>
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001  <span class="keyword">function</span> vm_in_mat = F_gen_variant_Morris(vs_factors_def,vs_method_options)
+0002 <span class="comment">% Generation des variants pour la methode de Morris.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Cette fonction sert a generer un echantillon pour le calcul des indices</span>
+0005 <span class="comment">% principaux et totaux avec la methode de Morris. Cette methode est</span>
+0006 <span class="comment">% decrite en detail dans le document &quot;La Methode de Morris et ses extensions&quot;</span>
+0007 <span class="comment">% qui servira de reference dans les commentaires suivants (notamment pour</span>
+0008 <span class="comment">% les formules utilisees).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">% ENTREES :</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%      - vs_factors_def : structure de definition des facteurs</span>
+0014 <span class="comment">%          o vs_factors_def.Dist (OPTIONNEL) : vecteur de cell contenant le type de distribution pour</span>
+0015 <span class="comment">%            chaque facteur.</span>
+0016 <span class="comment">%            Pour voir la liste des distributions disponibles, executer la</span>
+0017 <span class="comment">%            fonction F_create_sample() sans argument.</span>
+0018 <span class="comment">%            ATTENTION: pour utiliser des lois autres que les lois uniforme et</span>
+0019 <span class="comment">%            triangulaire il est necessaire d'avoir la toolbox matlab &quot;statistics&quot;.</span>
+0020 <span class="comment">%            ATTENTION: la methode ne fonctionne pas avec la distribution</span>
+0021 <span class="comment">%            'discrete'.</span>
+0022 <span class="comment">%            Si ce champ n'est pas precise ou est vide, les distributions des facteurs seront toutes fixees e</span>
+0023 <span class="comment">%            'uniform'.</span>
+0024 <span class="comment">%            Si le vecteur ne contient qu'une seule distribution alors tous les facteurs auront</span>
+0025 <span class="comment">%            la distribution donnee.</span>
+0026 <span class="comment">%            Dans ces deux derniers cas le champ Nb devra etre</span>
+0027 <span class="comment">%            precise (cf. ci-apres).</span>
+0028 <span class="comment">%          o vs_factors_def.DistParams (OPTIONNEL) : vecteur de cell</span>
+0029 <span class="comment">%            contenant le vecteur des parametres de la distribution</span>
+0030 <span class="comment">%            pour chaque facteur.</span>
+0031 <span class="comment">%            Pour voir la liste des parametres requis pour chaque distribution</span>
+0032 <span class="comment">%            disponible, executer la fonction F_create_sample() sans argument.</span>
+0033 <span class="comment">%            Si ce champ n'est pas fourni ou est vide, les parametres</span>
+0034 <span class="comment">%            seront fixes a 0 et 1.</span>
+0035 <span class="comment">%            Si ce champ ne contient qu'un vecteur de parametre, ces</span>
+0036 <span class="comment">%            parametres seront utilises pour toutes les distributions.</span>
+0037 <span class="comment">%          o vs_factors_def.Nb (OPTIONNEL) : scalaire contenant le</span>
+0038 <span class="comment">%            nombre de facteurs. Obligatoire si le champ Dist n'est pas</span>
+0039 <span class="comment">%            precise, est vide ou ne contient qu'une seule distribution.</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%      - vs_method_options : structure de definition des options de la</span>
+0042 <span class="comment">%        methode</span>
+0043 <span class="comment">%          o vs_method_options.p : nombre de niveaux de la grille régulière.</span>
+0044 <span class="comment">%            Type : scalaire si tous les facteurs ont le même nombre de</span>
+0045 <span class="comment">%            niveaux, vecteur de taille le n° de facteurs si le nombre de</span>
+0046 <span class="comment">%            niveaux est différent selon les facteurs.</span>
+0047 <span class="comment">%          o vs_method_options.n : (OPTIONNEL) rapport delta/taille d'un pas.</span>
+0048 <span class="comment">%            (taille valant 1/(p-1)) ATTENTION :</span>
+0049 <span class="comment">%            NE PEUT PAS ETRE SUPERIEUR OU EGAL A  p.</span>
+0050 <span class="comment">%            Valeur par défaut : 2.</span>
+0051 <span class="comment">%            Type : scalaire si une seule valeur pour tous les facteurs,</span>
+0052 <span class="comment">%            vecteur de taille le n° de facteurs si valeurs différentes</span>
+0053 <span class="comment">%            selon les facteurs.</span>
+0054 <span class="comment">%          o vs_method_options.r : nombre de trajectoires (type : scalaire)</span>
+0055 <span class="comment">%          o vs_method_options.Q : (OPTIONNEL) nombre de groupe de r trajectoires sur lesquels s'effectue la</span>
+0056 <span class="comment">%            sélection des r trajectoires (type : scalaire). Valeur par</span>
+0057 <span class="comment">%            défaut : 100.</span>
+0058 <span class="comment">%          o vs_method_options.incert : (OPTIONNEL) methode d'estimation des</span>
+0059 <span class="comment">%          incertitudes sur les indices calculés : 'bootstrap' (par</span>
+0060 <span class="comment">%          bootstrap, i.e. par ré-échantillonnage de m groupes de trajectoires</span>
+0061 <span class="comment">%          parmi les r  -&gt; r*(k+1) simulations du modèle), ou 'réplication'</span>
+0062 <span class="comment">%          (par réplication, i.e. qu'on répète m fois le plan d'expérience</span>
+0063 <span class="comment">%          de r trajectoires -&gt; r*(k+1)*m simulations du modèle).</span>
+0064 <span class="comment">%          Valeur par défaut : bootstrap.</span>
+0065 <span class="comment">%          o vs_method_options.m : (OPTIONNEL) nombre de</span>
+0066 <span class="comment">%            ré-échantillonnage boostrap ou nombre de réplicats de groupes de r</span>
+0067 <span class="comment">%            trajectoires contenus dans la matrice en sortie ou  (selon valeur de vs_method_options.incert).</span>
+0068 <span class="comment">%            Valeur par défaut : r si bootstrap, 5 si réplication.</span>
+0069 <span class="comment">%</span>
+0070 <span class="comment">%   SORTIE(S): descriptif des arguments de sortie</span>
+0071 <span class="comment">%      - v_in_mat : le groupe de r trajectoires de distance interne</span>
+0072 <span class="comment">%      maximale (type : matrice de taille (r*(k+1),k)</span>
+0073 <span class="comment">%</span>
+0074 <span class="comment">%   CONTENU: descriptif de la fonction</span>
+0075 <span class="comment">%      - sélection d'un groupe de r trajectoires de distance interne maximale parmi</span>
+0076 <span class="comment">%        Q groupes de r trajectoires</span>
+0077 <span class="comment">%</span>
+0078 <span class="comment">%  AUTEUR(S): Cyril AUCLAIR (stagiaire de Samuel BUIS à l'INRA PACA mai-septembre 2013)</span>
+0079 <span class="comment">%  DATE CREATION: 13-Jun-2013</span>
+0080 <span class="comment">%</span>
+0081 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0082 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0083 <span class="comment">%    $Author: plecharpent $</span>
+0084 <span class="comment">%    $Revision: 40 $</span>
+0085 <span class="comment">%</span>
+0086 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0087 
+0088 
+0089 <span class="comment">%% Definition du tableau contenant les options de la methode</span>
+0090 vc_options_desc=struct(<span class="string">'name'</span>,{<span class="string">'p'</span>,<span class="string">'n'</span>,<span class="string">'r'</span>,<span class="string">'Q'</span>,<span class="string">'incert'</span>,<span class="string">'m'</span>},<span class="keyword">...</span>
+0091     <span class="string">'datatype'</span>,{<span class="string">'uint32'</span>,<span class="string">'uint32'</span>,<span class="string">'uint32'</span>,<span class="string">'uint32'</span>,<span class="string">'char'</span>,<span class="string">'uint32'</span>},<span class="keyword">...</span>
+0092     <span class="string">'status'</span>,{<span class="string">'non optional'</span>,<span class="string">'optional'</span>,<span class="string">'non optional'</span>,<span class="string">'optional'</span>,<span class="string">'optional'</span>,<span class="string">'optional'</span>},<span class="keyword">...</span>
+0093     <span class="string">'defaultvalue'</span>,{[],2,[],100,<span class="string">'bootstrap'</span>,[]},<span class="keyword">...</span>
+0094     <span class="string">'comments'</span>,{<span class="string">'Nombre de modalité des facteurs'</span>,<span class="keyword">...</span>
+0095                 <span class="string">'Rapport delta/taille d un pas'</span>,<span class="keyword">...</span>
+0096                 <span class="string">'Nombre de trajectoires'</span>,<span class="keyword">...</span>
+0097                 <span class="string">'Nombre de groupe de r trajectoires sur lesquels s''effectue la sélection des r trajectoires'</span>,<span class="keyword">...</span>
+0098                 <span class="string">'methode d''estimation des incertitudes sur les indices calculés : ''bootstrap'' ou ''réplication'''</span>,<span class="keyword">...</span>
+0099                 <span class="string">'Nombre de ré-échantillonnages boostrap ou nombre de réplicats de groupes r trajectoires'</span>});
+0100 
+0101 <span class="comment">%% Retour de la structure pour verification si appel sans arguments</span>
+0102 <span class="keyword">if</span> nargin==0
+0103     vm_in_mat=vc_options_desc;
+0104     <span class="keyword">return</span>
+0105 <span class="keyword">end</span>
+0106 
+0107 <span class="comment">%% Renseignement des options par defaut</span>
+0108 <span class="keyword">for</span> i=1:length(vc_options_desc)
+0109     <span class="keyword">if</span> ~isfield(vs_method_options,vc_options_desc(i).name)
+0110         <span class="keyword">if</span> strmatch(<span class="string">'optional'</span>,vc_options_desc(i).status,<span class="string">'exact'</span>)
+0111             vs_method_options.(vc_options_desc(i).name)=vc_options_desc(i).defaultvalue;
+0112         <span class="keyword">else</span>
+0113             error([<span class="string">'L''option '</span> vc_options_desc(i).name <span class="string">' doit etre renseignee.'</span>])
+0114         <span class="keyword">end</span>
+0115     <span class="keyword">end</span>
+0116 <span class="keyword">end</span>
+0117 F_create_message(<span class="string">'Probleme dans les arguments en entree'</span>,<span class="keyword">...</span>
+0118     <span class="string">'L''option incert doit contenir ''bootstrap'' ou ''replication'''</span>,<span class="keyword">...</span>
+0119     ~strcmpi(vs_method_options.incert,{<span class="string">'bootstrap'</span>,<span class="string">'replication'</span>}),1);
+0120 <span class="keyword">if</span> ~isfield(vs_method_options,<span class="string">'m'</span>) || isempty(vs_method_options.m)
+0121     <span class="keyword">if</span> strcmpi(vs_method_options.incert,<span class="string">'bootstrap'</span>)
+0122         vs_method_options.m=vs_method_options.r;
+0123     <span class="keyword">elseif</span> strcmpi(vs_method_options.incert,<span class="string">'replication'</span>)
+0124         vs_method_options.m=5;
+0125     <span class="keyword">end</span>
+0126 <span class="keyword">end</span>
+0127 
+0128 <span class="comment">%% Tests divers sur les arguments</span>
+0129 <span class="keyword">if</span> ~isfield(vs_factors_def,<span class="string">'Dist'</span>) || isempty(vs_factors_def.Dist)
+0130     vs_factors_def.Dist={<span class="string">'uniform'</span>};
+0131 <span class="keyword">end</span>
+0132 <span class="keyword">if</span> length(vs_factors_def.Dist)==1
+0133     F_create_message(<span class="string">'Probleme dans les arguments en entree'</span>,<span class="keyword">...</span>
+0134             <span class="string">'Lorsque le champ dist de l''argument vs_factors_def n''est pas fourni ou ne contient qu''une distribution, le champ Nb de l''argument vs_factors_def doit etre defini.'</span>,<span class="keyword">...</span>
+0135             ~isfield(vs_factors_def,<span class="string">'Nb'</span>) || isempty(vs_factors_def.Nb),1);
+0136     vs_factors_def.Dist=mat2cell(repmat(vs_factors_def.Dist{1},vs_factors_def.Nb,1),ones(1,vs_factors_def.Nb),length(vs_factors_def.Dist{1}));
+0137 <span class="keyword">else</span>
+0138     vs_factors_def.Nb=length(vs_factors_def.Dist);
+0139 <span class="keyword">end</span>
+0140 F_create_message(<span class="string">''</span>,<span class="keyword">...</span>
+0141     <span class="string">'La methode ne fonctionne pas avec la distribution ''discrete''.'</span>,<span class="keyword">...</span>
+0142     ~isempty(strmatch(<span class="string">'discrete'</span>,vs_factors_def.Dist,<span class="string">'exact'</span>)),1);
+0143 <span class="keyword">if</span> ~isfield(vs_factors_def,<span class="string">'DistParams'</span>) || isempty(vs_factors_def.DistParams)
+0144     vs_factors_def.DistParams={[0,1]};
+0145 <span class="keyword">end</span>
+0146 <span class="keyword">if</span> length(vs_factors_def.DistParams)==1
+0147     <span class="keyword">for</span> i=2:vs_factors_def.Nb
+0148         vs_factors_def.DistParams{i}=vs_factors_def.DistParams{1};
+0149     <span class="keyword">end</span>
+0150 <span class="keyword">end</span>      
+0151 <span class="keyword">for</span> i=1:vs_factors_def.Nb
+0152     [v_checked, v_flag_bounded] = F_check_distr(vs_factors_def.Dist{i},vs_factors_def.DistParams{i});
+0153     F_create_message([<span class="string">'Problème avec la distribution du facteur '</span> num2str(i)],<span class="keyword">...</span>
+0154         <span class="string">'La methode ne fonctionne pas avec les distributions non bornées.'</span>,<span class="keyword">...</span>
+0155         ~v_flag_bounded,1);
+0156     F_create_message([<span class="string">'Problème avec la distribution du facteur '</span> num2str(i)],<span class="keyword">...</span>
+0157         <span class="string">'Voir messages ci-dessus.'</span>,<span class="keyword">...</span>
+0158         ~v_checked,1);
+0159 <span class="keyword">end</span>
+0160 
+0161 <span class="comment">%% Code de la méthode</span>
+0162 
+0163 k = vs_factors_def.Nb; 
+0164 p = vs_method_options.p;
+0165 <span class="keyword">if</span> (length(p) == 1 &amp;&amp; k~=1)
+0166     p = p*ones(1,k);
+0167 <span class="keyword">end</span>
+0168 n = vs_method_options.n;
+0169 <span class="keyword">if</span> (length(n) == 1 &amp;&amp; k~=1)
+0170     n = n*ones(1,k);
+0171 <span class="keyword">end</span>
+0172 r = vs_method_options.r;
+0173 Q = vs_method_options.Q;
+0174 <span class="keyword">if</span> strcmp(lower(vs_method_options.incert),<span class="string">'replication'</span>)
+0175     m = vs_method_options.m;
+0176 <span class="keyword">else</span>
+0177     m=1;
+0178 <span class="keyword">end</span>
+0179 <span class="keyword">if</span> n&gt;=p
+0180      error(<span class="string">'ERREUR : La fonction F_gen_variant_Morris(k,p,n,r,Q) ne doit pas être appelée avec le facteur n supérieur ou égal à p.'</span>)
+0181 <span class="keyword">else</span>
+0182     <span class="keyword">if</span> (n-floor(n))~=0
+0183         error(<span class="string">'ERREUR : La fonction F_gen_variant_Morris(k,p,n,r,Q) ne doit pas être appelée avec un facteur n non entier.'</span>);
+0184     <span class="keyword">end</span>
+0185     vm_in_mat = zeros((k+1)*r*m,k);
+0186     <span class="keyword">for</span> j = 1 : m
+0187         [vc_h2,v_D1] = <a href="#_sub1" class="code" title="subfunction [vc_selecTraj,v_distance] = F_SelecTrajEtCalculDist(k,p,n,r)">F_SelecTrajEtCalculDist</a>(k,p,n,r); 
+0188         v_Dmin = v_D1;
+0189         vc_hmin = vc_h2;
+0190         <span class="keyword">for</span> i = 1:Q-1
+0191         [vc_SelectionTrajectoires,v_D2]=<a href="#_sub1" class="code" title="subfunction [vc_selecTraj,v_distance] = F_SelecTrajEtCalculDist(k,p,n,r)">F_SelecTrajEtCalculDist</a>(k,p,n,r);
+0192             <span class="keyword">if</span> v_D2&gt;v_D1
+0193                 vc_h2= vc_SelectionTrajectoires;
+0194                 v_D1= v_D2;
+0195             <span class="keyword">end</span>
+0196 <span class="comment">% partie à décommenter pour avoir un calcul de l'ensemble de trajectoires ayant</span>
+0197 <span class="comment">% une distance totale minimale</span>
+0198 <span class="comment">%</span>
+0199 <span class="comment">%            if v_D2&lt;v_Dmin</span>
+0200 <span class="comment">%                vc_hmin = vc_SelectionTrajectoires;</span>
+0201 <span class="comment">%                v_Dmin = v_D2;</span>
+0202 <span class="comment">%            end</span>
+0203         <span class="keyword">end</span>
+0204         
+0205 <span class="comment">% partie à décommenter pour avoir un affichage de plots montrant les</span>
+0206 <span class="comment">% trajectoires de vc_h2 et vc_hmin dans un plan (sur les 2 premiers facteurs)</span>
+0207 <span class="comment">%</span>
+0208 <span class="comment">%        figure</span>
+0209 <span class="comment">%hold on</span>
+0210 <span class="comment">%for i = 1 :vs_method_options.r</span>
+0211 <span class="comment">%plot(vc_h2{i}(:,1),vc_h2{i}(:,2));</span>
+0212 <span class="comment">%end</span>
+0213 <span class="comment">%hold off</span>
+0214 <span class="comment">%figure</span>
+0215 <span class="comment">%hold on</span>
+0216 <span class="comment">%for i = 1 :vs_method_options.r</span>
+0217 <span class="comment">%plot(vc_hmin{i}(:,1),vc_hmin{i}(:,2));</span>
+0218 <span class="comment">%end</span>
+0219         
+0220         <span class="keyword">for</span> i = 1:r
+0221             vm_in_mat((j-1)*r*(k+1)+(i-1)*(k+1)+1 : i*(k+1)+(j-1)*r*(k+1), :)=vc_h2{i};
+0222         <span class="keyword">end</span>
+0223     <span class="keyword">end</span>
+0224 <span class="keyword">end</span>
+0225     
+0226 <span class="keyword">for</span> i=1:k
+0227     [v_tmp, vm_in_mat(:,i)]=F_inverse_cdf(vs_factors_def.Dist{i},vs_factors_def.DistParams{i},vm_in_mat(:,i));
+0228 <span class="keyword">end</span>
+0229 
+0230 
+0231 <a name="_sub0" href="#_subfunctions" class="code">function [vc_selecTraj,v_distance] = F_SelecTrajEtCalculDist(k,p,n,r)</a>
+0232 <span class="comment">% sélection des r trajectoires dans une matrice de matrices et insertion dans</span>
+0233 <span class="comment">% une matrice ~ de la distance globale D de cette ensemble de trajectoires</span>
+0234 <span class="comment">% arguments en entrée :</span>
+0235 <span class="comment">% * k : dimension de la grille régulière (type : scalaire)</span>
+0236 <span class="comment">% * p : nombre de niveaux de la grille régulière (type : scalaire)</span>
+0237 <span class="comment">% * n : rapport delta/taille d'un pas (taille valant 1/(p-1)) ATTENTION :</span>
+0238 <span class="comment">%   NE PEUT PAS ETRE SUPERIEUR OU EGAL A  p</span>
+0239 <span class="comment">% * r : nombre de trajectoires (type : scalaire)</span>
+0240 <span class="comment">% argument en sortie :</span>
+0241 <span class="comment">% * vc_selecTraj : la sélection de r trajectoires (type : vecteur de r cell de matrice k*k+1)</span>
+0242 <span class="comment">% * v_distance : la distance globale D de cette sélection de trajectoires</span>
+0243 <span class="comment">%                (type : scalaire)</span>
+0244 vc_selecTraj = <a href="#_sub3" class="code" title="subfunction vc_g=F_SelectionTrajectoires(k, p,n, r)">F_SelectionTrajectoires</a>(k,p,n,r);
+0245 v_sommeDesdAuCarre=0;
+0246 <span class="keyword">for</span> i = 1:r-1
+0247     vv_M4=cellfun(@(x) <a href="#_sub2" class="code" title="subfunction v_g=F_d(vm_Btmp_starI,vm_Btmp_starJ)">F_d</a>(vc_selecTraj{i},x),vc_selecTraj(i+1:r));
+0248     v_sommeDesdAuCarre=v_sommeDesdAuCarre+sum(vv_M4.^2);
+0249 <span class="keyword">end</span>
+0250 v_distance = sqrt(v_sommeDesdAuCarre);
+0251 
+0252 
+0253 <a name="_sub1" href="#_subfunctions" class="code">function v_g=F_d(vm_Btmp_starI,vm_Btmp_starJ)</a>
+0254 <span class="comment">% calcul de la distance entre 2 trajectoires. pré-condition : vm_Btmp_starI et vm_Btmp_starJ sont</span>
+0255 <span class="comment">% deux matrices de trajectoires de mêmes dimensions et de nombre de lignes</span>
+0256 <span class="comment">% strictement plus grand que leur nombre de colonnes</span>
+0257 <span class="comment">% arguments en entrée : les deux trajectoires entre lesquelle on cherche la</span>
+0258 <span class="comment">%                       la distance mutuelle (type : matrices k*k+1 avec k</span>
+0259 <span class="comment">%                       un entier naturel)</span>
+0260 <span class="comment">% argument en sortie : cette distance (type scalaire)</span>
+0261 k = size(vm_Btmp_starI,2);
+0262 v_dIJ=0;
+0263 <span class="keyword">for</span> l = 1:k+1
+0264     v_scalaire1=0;
+0265     <span class="keyword">for</span> m = 1:k+1
+0266         vv_vect=(vm_Btmp_starI(l,:)-vm_Btmp_starJ(m,:)).*(vm_Btmp_starI(l,:)-vm_Btmp_starJ(m,:));
+0267         v_scalaire2=sum(vv_vect);
+0268         v_scalaire1=v_scalaire1+sqrt(v_scalaire2);
+0269     <span class="keyword">end</span>
+0270     v_dIJ=v_dIJ+v_scalaire1;
+0271 <span class="keyword">end</span>
+0272 v_g=v_dIJ;
+0273 
+0274 <a name="_sub2" href="#_subfunctions" class="code">function vc_g=F_SelectionTrajectoires(k, p,n, r)</a>
+0275 <span class="comment">% ensemble aléatoire de r trajectoires dans un cell de matrices</span>
+0276 <span class="comment">% arguments en entrée :</span>
+0277 <span class="comment">% * k : dimension de la grille régulière (type : scalaire)</span>
+0278 <span class="comment">% * p : nombre de niveaux de la grille régulière (type : scalaire)</span>
+0279 <span class="comment">% * n : rapport delta/taille d'un pas (taille valant 1/(p-1)) ATTENTION :</span>
+0280 <span class="comment">%   NE PEUT PAS ETRE SUPERIEUR OU EGAL A  p</span>
+0281 <span class="comment">% * r : nombre de trajectoires (type : scalaire)</span>
+0282 <span class="comment">% argument en sortie : cet ensemble de trajectoires</span>
+0283 <span class="comment">%                     (type : vecteur de r cell de matrice k*k+1)</span>
+0284 vc_g=arrayfun(@(x) <a href="#_sub4" class="code" title="subfunction vm_Btmp_star=F_Btmp_star(k,p,n)">F_Btmp_star</a>(k,p,n),1:r,<span class="string">'UniformOutput'</span>,false);
+0285 
+0286 <a name="_sub3" href="#_subfunctions" class="code">function vm_Btmp_star=F_Btmp_star(k,p,n)</a>
+0287 <span class="comment">% création aléatoire d'une trajectoire</span>
+0288 <span class="comment">% arguments en entrée :</span>
+0289 <span class="comment">% * k : dimension de la grille régulière (tye : scalaire)</span>
+0290 <span class="comment">% * p : nombre de niveaux de la grille régulière (type : scalaire)</span>
+0291 <span class="comment">% * n : rapport delta/taille d'un pas (taille valant 1/(p-1)) ATTENTION :</span>
+0292 <span class="comment">%   NE PEUT PAS ETRE SUPERIEUR OU EGAL A  p</span>
+0293 <span class="comment">% argument en sortie : cette trajectoire (type : matrice)</span>
+0294 v_delta =n./(p-1);
+0295 <span class="comment">% Ici on a modifié la formule par rapport à celle de Morris 1991 pour</span>
+0296 <span class="comment">% prendre en compte des deltas differents selon le facteur : J*xstar n'est</span>
+0297 <span class="comment">% plus multiplie par Pstar (cela n'etait pas obligatoire puisque xstar est</span>
+0298 <span class="comment">% aléatoire) et la multiplication par delat est faite après application de</span>
+0299 <span class="comment">% Pstar pour que les valeurs de deltas ne soient pas permutées entre les facteurs.</span>
+0300 vm_Btmp_star=<a href="#_sub7" class="code" title="subfunction vm_J=F_J(n1,n2)">F_J</a>(k+1,1)*<a href="#_sub5" class="code" title="subfunction vv_x_star=F_x_star(k,p,n)">F_x_star</a>(k,p,n)+ repmat(v_delta,k+1,1).*(0.5.*((2.*<a href="#_sub6" class="code" title="subfunction vm_B=F_B(k)">F_B</a>(k)-<a href="#_sub7" class="code" title="subfunction vm_J=F_J(n1,n2)">F_J</a>(k+1,k))*<a href="#_sub8" class="code" title="subfunction vm_D_star=F_D_star(k)">F_D_star</a>(k)+<a href="#_sub7" class="code" title="subfunction vm_J=F_J(n1,n2)">F_J</a>(k+1,k))*<a href="#_sub9" class="code" title="subfunction vm_P_star=F_P_star(k)">F_P_star</a>(k));
+0301 
+0302 <a name="_sub4" href="#_subfunctions" class="code">function vv_x_star=F_x_star(k,p,n)</a>
+0303 <span class="comment">% tirage aléatoire x*</span>
+0304 <span class="comment">% arguments en entrée :</span>
+0305 <span class="comment">% * k : dimension de la grille régulière (type : scalaire)</span>
+0306 <span class="comment">% * p : nombre de niveaux de la grille régulière (type : scalaire)</span>
+0307 <span class="comment">% * n : rapport delta/taille d'un pas (taille valant 1/(p-1)) ATTENTION :</span>
+0308 <span class="comment">% NE PEUT PAS ETRE SUPERIEUR OU EGAL A p</span>
+0309 <span class="comment">% argument en sortie : x* (type : vecteur)</span>
+0310 vv_j = zeros(1,k);
+0311 <span class="keyword">for</span> l = 1:k
+0312     vv_j(l) = randi(p(l)-n(l),1,1);
+0313 <span class="keyword">end</span>
+0314 vv_x_star=(vv_j-1).*(1./(p-1));
+0315 
+0316 <a name="_sub5" href="#_subfunctions" class="code">function vm_B=F_B(k)</a>
+0317 <span class="comment">% B, matrice strictement triangulaire inférieure</span>
+0318 <span class="comment">% de taille (k+1,k) dont les éléments non nuls valent 1;</span>
+0319 <span class="comment">% argument en entrée : k : dimension de la grille régulière</span>
+0320 <span class="comment">% argument en sortie : B (type : matrice k*k+1)</span>
+0321 vm_B = zeros(k+1,k);
+0322 <span class="keyword">for</span> v_i = 2:k+1
+0323     vm_B(v_i,1:v_i-1)=ones(1,v_i-1);
+0324 <span class="keyword">end</span>
+0325 
+0326 <a name="_sub6" href="#_subfunctions" class="code">function vm_J=F_J(n1,n2)</a>
+0327 <span class="comment">% matrices dont tous les éléments valent 1</span>
+0328 <span class="comment">% arguments en entrée :</span>
+0329 <span class="comment">% * n1 : nombre de ligne(s) de la matrice (type : scalaire &gt; 0)</span>
+0330 <span class="comment">% * n2 : nombre de colonne(s) de la matrice (type : scalaire &gt; 0)</span>
+0331 <span class="comment">% argument en sortie : cette matrice, avec n1 lignes et n2 colonnes</span>
+0332 vm_J = ones(n1,n2);
+0333 
+0334 <a name="_sub7" href="#_subfunctions" class="code">function vm_D_star=F_D_star(k)</a>
+0335 <span class="comment">% D* matrice diagonale de taille (k,k) et</span>
+0336 <span class="comment">% dont les éléments valent 1 ou -1, et ce</span>
+0337 <span class="comment">% avec une probabilité égale et indépendante</span>
+0338 <span class="comment">% entre chaque élément</span>
+0339 vm_D_star = diag(randi(2,1,k).*2-3);
+0340 
+0341 <a name="_sub8" href="#_subfunctions" class="code">function vm_P_star=F_P_star(k)</a>
+0342 <span class="comment">% P* matrice de permutation de taille(k,k)</span>
+0343 vv_M1 = randsample(k,k)';
+0344 vv_M1=vv_M1+(0 : k : k*(k-1));
+0345 vm_P_star = zeros(k,k);
+0346 vm_P_star(vv_M1)=1;
+0347 
+0348 
+0349 <span class="comment">% Tracé trajectoire 2D</span>
+0350 <span class="comment">% traj=Btmp_star(2,6)</span>
+0351 <span class="comment">% plot(traj(:,1),traj(:,2),'+')</span>
+0352 <span class="comment">% ylim([0,1])</span>
+0353 <span class="comment">% xlim([0,1])</span></pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

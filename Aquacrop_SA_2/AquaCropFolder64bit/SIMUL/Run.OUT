@@ -1,0 +1,6 @@
+AquaCrop 4.0 (June 2012) - Output created on (date) : 11/13/2015   at (time) : 4:33:04 PM
+Simulation run
+
+    RunNr     Day1   Month1    Year1     Rain      ETo       GD     CO2      Irri   Infilt   Runoff    Drain   Upflow        E     E/Ex       Tr   Tr/Trx    SaltIn   SaltOut    SaltUp  SaltProf     Cycle   SaltStr  FertStr  TempStr   ExpStr   StoStr  BioMass  Brelative   HI     Yield     WPet     DayN   MonthN    YearN
+                                           mm       mm    °C.day    ppm        mm       mm       mm       mm       mm       mm        %       mm        %    ton/ha    ton/ha    ton/ha    ton/ha      days       %        %        %        %        %    ton/ha        %       %    ton/ha    kg/m3
+        1        1        9     2012      400      695     3561   394.57      211      611        0      169        4      163       56      309       93     0.000     0.000     0.000     0.000      202        0        0       35        0        3    18.102       95     21.0    3.804     1.16       20        6     2013

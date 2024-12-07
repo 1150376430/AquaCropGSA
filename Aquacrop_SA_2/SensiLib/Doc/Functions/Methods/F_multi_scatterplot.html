@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description de F_multi_scatterplot</title>
+  <meta name="keywords" content="F_multi_scatterplot">
+  <meta name="description" content="Trac a  des nuages de points d'une variable de sortie en fonction des">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<!-- menu.html Methods -->
+<h1>F_multi_scatterplot
+</h1>
+
+<h2><a name="_name"></a>BUT <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Trac a  des nuages de points d'une variable de sortie en fonction des</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [v_S,v_bandwith]=F_multi_scatterplot(v_mat_variant,vc_parname,v_mat_out,v_varname,varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Trac a  des nuages de points d'une variable de sortie en fonction des
+ diff a rents param a tres variants et des regressions non param a triques par
+ noyau, calcul approch a  des indices principaux.
+ ATTENTION, les r a gressions et les valeurs des indices calcul a s peuvent
+  a tre tr a s d a pendants des valeurs du param a tre v_bandwith.
+ 
+
+ ENTREES :
+       - v_mat_variant : 
+          matrice de type flottant de taille : 
+             no de simulations * no de param a tres variant
+          contenant l' a chantillon de valeurs des param a tres 
+
+       - vc_parname : 
+          cell a 1 dimension de taille : no de param a tres
+          contenant le nom des diff a rents param a tres.
+
+       - v_mat_out :
+          vecteur de type flottant de taille : no de simulations
+          contenant les valeurs simul a es d'une variable (a 1 date) a
+          analyser. 
+
+       - v_varname : 
+          nom de la variable a analyser (string).
+
+       - v_bandwith (OPTIONNEL) :
+          Largeur de bande qui caract a rise l'amplitude de la zone
+          d'influence du noyau.
+          Si c'est un scalaire, la valeur fournie sera utilis a e pour
+          l'ensemble des param a tre, sinon, v_bandwith doit  a tre un vecteur
+          de taille le nombre de param a tres.
+          Si cet argument n'est pas fourni, une valeur par d a faut est
+          utilis a e. 
+
+       - v_binf et v_bsup (OPTIONNELS) : 
+          vecteur de type entier et de taille le nombre de param a tres variants, 
+          contenant les bornes inf a rieures et sup a rieures des param a tres.
+          Si ces arguments sont fournis, les limites des axes des abscisses 
+          des diff a rents graphes seront fix a es a ces bornes.  
+          Les bornes peuvent  a tre fix a es a -Inf (borne inf a rieure) ou Inf
+          (borne sup a rieure) si certains param a tres ne sont pas born a s ou
+          si l'utilisateur ne souhaite pas que l'axe des abscisses des graphes de ces
+          param a tres soit redimensionn a .
+
+ SORTIE :
+       - v_S : vecteur de taille no de param a tres 
+       contenant les valeurs approch a es des indices de sensibilit a 
+       principaux des diff a rents param a tres pour la variable/date consid a r a e. 
+
+       Figures contenant les diff a rents nuages de points (1 par param a tre)
+       et les regressions associ a es.
+
+
+ CONTENU :
+
+ AUTEUR : S. BUIS
+ DATE : 23-mai-2008
+ VERSION : 0
+  
+  MODIFICATIONS (last commit)
+    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $
+    $Author: plecharpent $
+    $Revision: 40 $
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Initialisations</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>INFORMATION SUR LES REFERENCES CROISEES <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+Cette fonction fait appel à:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+Cette fonction est appelée par:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+<h2><a name="_source"></a>CODE SOURCE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v_S,v_bandwith]=F_multi_scatterplot(v_mat_variant,vc_parname,v_mat_out,v_varname,varargin)</a>
+0002 <span class="comment">% Trac a  des nuages de points d'une variable de sortie en fonction des</span>
+0003 <span class="comment">% diff a rents param a tres variants et des regressions non param a triques par</span>
+0004 <span class="comment">% noyau, calcul approch a  des indices principaux.</span>
+0005 <span class="comment">% ATTENTION, les r a gressions et les valeurs des indices calcul a s peuvent</span>
+0006 <span class="comment">%  a tre tr a s d a pendants des valeurs du param a tre v_bandwith.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% ENTREES :</span>
+0010 <span class="comment">%       - v_mat_variant :</span>
+0011 <span class="comment">%          matrice de type flottant de taille :</span>
+0012 <span class="comment">%             no de simulations * no de param a tres variant</span>
+0013 <span class="comment">%          contenant l' a chantillon de valeurs des param a tres</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%       - vc_parname :</span>
+0016 <span class="comment">%          cell a 1 dimension de taille : no de param a tres</span>
+0017 <span class="comment">%          contenant le nom des diff a rents param a tres.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%       - v_mat_out :</span>
+0020 <span class="comment">%          vecteur de type flottant de taille : no de simulations</span>
+0021 <span class="comment">%          contenant les valeurs simul a es d'une variable (a 1 date) a</span>
+0022 <span class="comment">%          analyser.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%       - v_varname :</span>
+0025 <span class="comment">%          nom de la variable a analyser (string).</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%       - v_bandwith (OPTIONNEL) :</span>
+0028 <span class="comment">%          Largeur de bande qui caract a rise l'amplitude de la zone</span>
+0029 <span class="comment">%          d'influence du noyau.</span>
+0030 <span class="comment">%          Si c'est un scalaire, la valeur fournie sera utilis a e pour</span>
+0031 <span class="comment">%          l'ensemble des param a tre, sinon, v_bandwith doit  a tre un vecteur</span>
+0032 <span class="comment">%          de taille le nombre de param a tres.</span>
+0033 <span class="comment">%          Si cet argument n'est pas fourni, une valeur par d a faut est</span>
+0034 <span class="comment">%          utilis a e.</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%       - v_binf et v_bsup (OPTIONNELS) :</span>
+0037 <span class="comment">%          vecteur de type entier et de taille le nombre de param a tres variants,</span>
+0038 <span class="comment">%          contenant les bornes inf a rieures et sup a rieures des param a tres.</span>
+0039 <span class="comment">%          Si ces arguments sont fournis, les limites des axes des abscisses</span>
+0040 <span class="comment">%          des diff a rents graphes seront fix a es a ces bornes.</span>
+0041 <span class="comment">%          Les bornes peuvent  a tre fix a es a -Inf (borne inf a rieure) ou Inf</span>
+0042 <span class="comment">%          (borne sup a rieure) si certains param a tres ne sont pas born a s ou</span>
+0043 <span class="comment">%          si l'utilisateur ne souhaite pas que l'axe des abscisses des graphes de ces</span>
+0044 <span class="comment">%          param a tres soit redimensionn a .</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">% SORTIE :</span>
+0047 <span class="comment">%       - v_S : vecteur de taille no de param a tres</span>
+0048 <span class="comment">%       contenant les valeurs approch a es des indices de sensibilit a</span>
+0049 <span class="comment">%       principaux des diff a rents param a tres pour la variable/date consid a r a e.</span>
+0050 <span class="comment">%</span>
+0051 <span class="comment">%       Figures contenant les diff a rents nuages de points (1 par param a tre)</span>
+0052 <span class="comment">%       et les regressions associ a es.</span>
+0053 <span class="comment">%</span>
+0054 <span class="comment">%</span>
+0055 <span class="comment">% CONTENU :</span>
+0056 <span class="comment">%</span>
+0057 <span class="comment">% AUTEUR : S. BUIS</span>
+0058 <span class="comment">% DATE : 23-mai-2008</span>
+0059 <span class="comment">% VERSION : 0</span>
+0060 <span class="comment">%</span>
+0061 <span class="comment">%  MODIFICATIONS (last commit)</span>
+0062 <span class="comment">%    $Date: 2013-06-19 14:49:50 +0200 (mer., 19 juin 2013) $</span>
+0063 <span class="comment">%    $Author: plecharpent $</span>
+0064 <span class="comment">%    $Revision: 40 $</span>
+0065 <span class="comment">%</span>
+0066 <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0067 <span class="comment">% Initialisations</span>
+0068 v_nb_par=length(vc_parname);
+0069 v_nb_maxcol=5;
+0070 v_nb_maxrow=5;
+0071 v_nb_fig_max=v_nb_maxcol*v_nb_maxrow;
+0072 v_bandwith=[];
+0073 v_bandwith_tmp=zeros(1,v_nb_par);
+0074 
+0075 v_binf=-Inf*ones(size(v_mat_variant,2),1);
+0076 v_bsup=Inf*ones(size(v_mat_variant,2),1);
+0077 <span class="keyword">if</span> nargin==5 || nargin==7
+0078     v_bandwith=varargin{1};
+0079     <span class="keyword">if</span> length(v_bandwith)~=v_nb_par
+0080         v_bandwith=v_bandwith*ones(1,v_nb_par);
+0081     <span class="keyword">end</span>
+0082 <span class="keyword">end</span>
+0083 <span class="keyword">if</span> nargin==6 || nargin==7
+0084     v_binf=varargin{1+nargin-6};
+0085     v_bsup=varargin{2+nargin-6};
+0086     v_tmp=v_binf&lt;v_bsup;
+0087     <span class="keyword">if</span> ~all(v_tmp)
+0088         v_param_list=strcat(vc_parname(v_tmp),<span class="string">','</span>);
+0089         error([<span class="string">'Les bornes inferieures des param a tres '</span>,[v_param_list{:}],<span class="string">' sont superieures ou egales a leurs bornes superieure.'</span>])
+0090     <span class="keyword">end</span>
+0091 <span class="keyword">else</span>
+0092 <span class="keyword">end</span>
+0093 
+0094 figure
+0095 j=1;
+0096 v_S=zeros(v_nb_par,1);
+0097 <span class="keyword">for</span> i=1:v_nb_par
+0098     <span class="keyword">if</span> (j&gt;v_nb_fig_max) 
+0099         figure
+0100         j=1;
+0101     <span class="keyword">end</span>
+0102     subplot(min(ceil(sqrt(v_nb_par)),v_nb_maxrow),min(ceil(v_nb_par/ceil(sqrt(v_nb_par))),v_nb_maxcol),j)
+0103     plot(v_mat_variant(:,i),v_mat_out,<span class="string">'.'</span>)
+0104     <span class="comment">%scattercloud(v_mat_variant(:,i),v_mat_out)</span>
+0105     hold on;
+0106     <span class="keyword">try</span>
+0107         <span class="keyword">if</span> ~isempty(v_bandwith)
+0108             r=ksr(v_mat_variant(:,i),v_mat_out,v_bandwith(i));
+0109             v_bandwith_tmp(i)=v_bandwith(i);
+0110         <span class="keyword">else</span>
+0111             r=ksr(v_mat_variant(:,i),v_mat_out);
+0112             v_bandwith_tmp(i)=r.h;
+0113         <span class="keyword">end</span>
+0114         plot(r.x,r.f,<span class="string">'r'</span>)
+0115         v_S(i)=var(r.f)/var(v_mat_out);
+0116         title(strcat(v_varname,<span class="string">' vs '</span>,vc_parname{i},<span class="string">' ; S~='</span>,num2str(v_S(i))));
+0117     <span class="keyword">catch</span>
+0118         disp([<span class="string">'Parametre '</span> vc_parname{i} <span class="string">' : pas assez de variation dans les donn a es, la regression ne sera pas trac a e'</span>])
+0119         title(strcat(v_varname,<span class="string">' vs '</span>,vc_parname{i}));
+0120     <span class="keyword">end</span>
+0121     xlim([v_binf(i) v_bsup(i)]);
+0122     j=j+1;
+0123 <span class="keyword">end</span>
+0124 v_bandwith=v_bandwith_tmp;</pre></div>
+<hr><address>Généré le Tue 18-Mar-2014 17:21:41 par <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>
