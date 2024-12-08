@@ -1,322 +1,128 @@
-# AquaCropGSA - AquaCrop模型全局敏感性分析工具箱
+# AquaCrop 敏感性分析项目
 
-基于MATLAB的AquaCrop模型参数全局敏感性分析工具箱，使用EFAST(扩展傅里叶幅度敏感性测试)和Morris方法来识别作物生长模拟中最具影响力的参数。
+## 1. 项目概述
+- 项目简介
+- 主要功能
+- 技术特点
+- 应用场景
 
-## 概述 | Overview
+## 2. 快速开始
+- 环境要求
+- 安装步骤
+- 基本使用
+- 运行示例
 
-本工具箱实现了敏感性分析方法，用于评估输入参数对AquaCrop模型输出的影响。主要关注：
-- 作物产量对水分的响应
-- 冠层覆盖度(CC)动态变化
-- 生物量产量
-- 水分生产力
-
-## 功能特点 | Features
-
-- 两种稳健的敏感性分析方法：
-  - EFAST方法 (扩展傅里叶幅度敏感性测试)
-    - 计算主效应和总效应指数
-    - 处理非线性和非单调关系
-  - Morris方法 (基本效应法)
-    - 高效的筛选方法
-    - 用较少的模拟次数识别影响参数
-- 与AquaCrop模型集成
-- 参数分布配置
-- 自动化模拟执行
-- 结果可视化
-- CC和产量分析
-
-## 系统要求 | Requirements
-
-- MATLAB (已在R2019b或更高版本测试)
-- AquaCrop插件 (v4.0)
-- MATLAB统计工具箱 (用于某些分布)
-
-## 安装说明 | Installation
-
-1. 克隆此仓库：
-bash
-git clone https://github.com/eyage/AquaCropGSA.git
+## 3. 项目结构
+### 3.1 目录结构
+```
+项目根目录/
+├── F_AS_Aquacrop.m          # 主控制函数
+├── EFAST.m                  # EFAST方法实现
+├── Morris.m                 # Morris方法实现
+├── run_sensitivity_analysis.m # 自动化运行脚本
+└── README.md                # 项目说明文档
 ```
 
-2. 将项目目录及其所有子目录添加到MATLAB路径：
-```matlab
-addpath(genpath('path/to/AquaCropGSA'));
+### 3.2 核心组件
+- 主控制模块
+- 分析方法模块
+- 工具函数模块
+- 可视化模块
+
+## 4. 敏感性分析方法
+### 4.1 EFAST方法
+- 原理说明
+- 参数设置
+- 结果解读
+
+### 4.2 Morris方法
+- 原理说明
+- 参数设置
+- 结果解读
+
+## 5. 参数说明
+### 5.1 关键参数列表
+- 作物生长参数
+- 土壤水分参数
+- 根系参数
+- 胁迫参数
+
+### 5.2 参数校准指南
+- 校准原则
+- 校准步骤
+- 注意事项
+
+## 6. 文件说明
+### 6.1 核心文件
+| 文件名 | 主要功能 | 输入 | 输出 | 调用关系 |
+|--------|----------|------|------|----------|
+| F_AS_Aquacrop.m | 主控制函数 | fileinput, Param | 敏感性指标, 模拟结果 | 调用EFAST.m或Morris.m |
+| EFAST.m | EFAST方法实现 | fileinput, 参数定义, 参数范围 | 主效应指数, 总效应指数 | 被F_AS_Aquacrop.m调用 |
+| Morris.m | Morris方法实现 | fileinput, 参数定义, 参数范围 | μ*, σ值, 参数重要性 | 被F_AS_Aquacrop.m调用 |
+| run_sensitivity_analysis.m | 自动化运行脚本 | 配置文件路径 | 分析结果文件 | 调用F_AS_Aquacrop.m |
+
+### 6.2 工具函数
+| 文件名 | 主要功能 | 输入 | 输出 | 使用场景 |
+|--------|----------|------|------|----------|
+| InParam.m | 参数初始化 | 参数范围, 默认值 | 初始化参数集 | 分析开始前 |
+| Treshold.m | 阈值计算 | 敏感性指标 | 阈值判断结果 | 参数筛选时 |
+| PlotLAI_m.m | LAI数据可视化 | 时间序列数据 | 图形输出 | 结果分析时 |
+| Limit4Param.m | 参数限制检查 | 参数值, 范围 | 有效性判断 | 参数设置时 |
+| ParamSet.m | 参数批量设置 | 参数配置 | 参数矩阵 | 批量处理时 |
+
+### 6.3 配置文件
+| 文件名 | 数据类型 | 主要内容 | 使用位置 |
+|--------|----------|----------|----------|
+| AC_fileinput_ref.mat | 模型配置 | 气候/土壤/作物数据 | 模型运行前加载 |
+| AC_Param_ref.mat | 参数配置 | 参数范围/分布设置 | 敏感性分析时使用 |
+
+### 6.4 结果文件
+| 文件名 | 数据类型 | 主要内容 | 生成时机 |
+|--------|----------|----------|----------|
+| AC_Xiao_XX_results.mat | 模拟结果 | 时间序列/产量数据 | 模拟完成后 |
+| AC_Xiao_XX_results_EFAST.mat | 分析结果 | 敏感性指标/排序 | EFAST分析后 |
+
+## 7. 开发指南
+### 7.1 代码规范
+- 命名规则
+- 注释要求
+- 错误处理
+
+### 7.2 版本控制
+- Git使用规范
+- 发布流程
+- 文档更新
+
+### 7.3 文件依赖关系
+```mermaid
+graph TD
+    A[F_AS_Aquacrop.m] --> B[EFAST.m]
+    A --> C[Morris.m]
+    D[run_sensitivity_analysis.m] --> A
+    B --> E[InParam.m]
+    C --> E
+    B --> F[Treshold.m]
+    C --> F
+    A --> G[PlotLAI_m.m]
+    E --> H[Limit4Param.m]
+    E --> I[ParamSet.m]
 ```
 
-3. 配置AquaCrop插件路径
+## 8. 常见问题
+- 运行问题
+- 参数设置
+- 结果分析
+- 错误处理
 
-## 目录结构 | Directory Structure
+## 9. 维护说明
+### 9.1 文件修改频率
+| 文件类型 | 修改频率 | 修改原因 | 注意事项 |
+|----------|----------|----------|----------|
+| 核心算法文件 | 低 | 算法优化/Bug修复 | 需要全面测试 |
+| 工具函数 | 中 | 功能扩展/优化 | 注意兼容性 |
+| 配置文件 | 高 | 参数调整/场景变化 | 保留备份 |
+| 可视化脚本 | 中 | 展示需求变化 | 注意图表规范 |
+| 结果文件 | 高 | 新增分析结果 | 注意命名规范 |
 
-- `SensiLib/`: 敏感性分析库
-  - `Code/Methods/`: EFAST和Morris方法的实现
-  - `Doc/`: 文档和示例
-- `Tools/`: 数据处理和分析的工具函数
-- `Aquacrop_plugin/`: AquaCrop模型接口文件
-- `Results/`: 模拟结果输出目录
-- `Structure/`: 项目结构和配置文件
-
-## 使用方法 | Usage
-
-### EFAST方法
-```matlab
-% 配置输入参数
-fileinput.vs_method_options.EFAST.NsIni = 1250;  % 样本大小
-fileinput.vs_method_options.EFAST.Nrep = 5;      % 重复次数
-
-% 运行EFAST分析
-[v_in_mat,v_Ns,v_w,v_in_mat_real,v_out_mat,vs_indices,CC_m] = ...
-    EFAST(fileinput,vs_factors_def,Param,v_lib_dir);
-```
-
-### Morris方法
-```matlab
-% 配置输入参数
-fileinput.vs_method_options.p = 8;    % 网格级别数
-fileinput.vs_method_options.n = 1;    % 轨迹数
-fileinput.vs_method_options.r = 10;   % 重复次数
-fileinput.vs_method_options.Q = 50;   % 轨迹组数
-
-% 运行Morris分析
-[v_in_mat,v_in_mat_real,v_out_mat,vs_indices,CC_m] = ...
-    Morris(fileinput,vs_factors_def,Param,v_lib_dir);
-```
-
-## 结果分析 | Output Analysis
-
-工具箱提供多个可视化脚本：
-- `Grafici_Paper.m`: 生成主要分析图
-  - 敏感性指数
-  - 参数排序
-  - 交互效应
-- `Grafici_Paper_2.m`: 生成补充图
-  - 时间序列分析
-  - 分布图
-- `Figure_mustar_sigma.m`: 绘制Morris方法的μ*-σ图
-
-## 主要应用 | Key Applications
-
-本工具箱已成功应用于：
-- 作物产量敏感性分析
-- 水分利用效率研究
-- 气候变化影响评估
-- 作物管理优化
-
-## 参考文献 | References
-
-如果您在研究中使用本工具箱，请引用：
-
-1. 主要方法论文献：
-- Campolongo, F., Cariboni, J., & Saltelli, A. (2007). An effective screening design for sensitivity analysis of large models. Environmental Modelling & Software, 22(10), 1509-1518.
-- Saltelli, A., Tarantola, S., & Chan, K. S. (1999). A quantitative model-independent method for global sensitivity analysis of model output. Technometrics, 41(1), 39-56.
-
-2. 相关应用文献：
-- Xu, X., et al. (2016). Sensitivity analysis of crop growth models applied to wheat in water limited conditions. Environmental Modelling & Software, 81, 12-25.
-- Confalonieri, R., et al. (2010). Sensitivity analysis of the rice model WARM in Europe: Exploring the effects of different locations, climates and methods of analysis on model sensitivity to crop parameters. Environmental Modelling & Software, 25(4), 479-488.
-
-## 许可证 | License
-
-本项目采用MIT许可证 - 详见LICENSE文件
-
-## 贡献 | Contributing
-
-欢迎贡献！请随时提交Pull Request。
-
-## 联系方式 | Contact
-
-如有问题和反馈，请联系：1150376430@qq.com
-
-## 致谢 | Acknowledgments
-
-本工作得到了敏感性分析方法及其在农业建模应用研究的支持。
-
-## 参数说明 | Parameters
-
-### 关键参数列表
-
-本工具箱分析的AquaCrop模型关键参数包括：
-
-1. 作物生长参数：
-   - CDC: 冠层生长系数
-   - CGC: 冠层衰减系数
-   - CCx: 最大冠层覆盖度
-   - Kcb: 基本作物系数
-   - WP*: 标准化水分生产力
-
-2. 土壤水分参数：
-   - CN: 径流曲线数
-   - REW: 易蒸发水
-   - TEW: 总可蒸发水
-   - θFC: 田间持水量
-   - θPWP: 永久枯萎点
-   - Ksat: 饱和导水率
-
-3. 根系参数：
-   - Zmin: 最小有效根深
-   - Zmax: 最大有效根深
-   - PexpZ: 根系扩展形状系数
-
-### 完整参数列表
-
-#### 作物生长参数
-| 参数 | 描述 | 单位 | 典型范围 |
-|------|------|------|----------|
-| CDC | 冠层衰减系数 | %/GDD | 0.001-0.003 |
-| CGC | 冠层生长系数 | %/GDD | 0.005-0.012 |
-| CCx | 最大冠层覆盖度 | % | 0.85-0.98 |
-| CCo | 初始冠层覆盖度 | % | 0.01-0.05 |
-| Kcb | 基本作物系数 | - | 0.9-1.1 |
-| WP* | 标准化水分生产力 | g/m² | 15-20 |
-| Tbase | 基本温度 | °C | 8-10 |
-| Tupper | 上限温度 | °C | 35-40 |
-| Emergence | 出苗所需积温 | GDD | 80-100 |
-| Senescence | 衰老开始积温 | GDD | 1300-1500 |
-| Maturity | 成熟所需积温 | GDD | 1700-1900 |
-| HIo | 参考收获指数 | % | 45-50 |
-| exc | 生长期过量冠层衰减系数 | %/day | 0.8-1.2 |
-| p(upper) | 上层土壤水分耗竭系数 | - | 0.10-0.15 |
-| p(lower) | 下层土壤水分耗竭系数 | - | 0.45-0.55 |
-| KcTop | 最大作物系数 | - | 1.0-1.2 |
-| fage | 衰老作用系数 | %/day | 0.10-0.15 |
-
-#### 土壤水分参数
-| 参数 | 描述 | 单位 | 典型范围 |
-|------|------|------|----------|
-| CN | 径流曲线数 | - | 65-85 |
-| θFC | 田间持水量 | m³/m³ | 0.20-0.40 |
-| θPWP | 永久枯萎点 | m³/m³ | 0.05-0.20 |
-| θSAT | 饱和含水量 | m³/m³ | 0.45-0.55 |
-| Ksat | 饱和导水率 | mm/day | 100-1000 |
-| REW | 易蒸发水 | mm | 8-12 |
-| TEW | 总可蒸发水 | mm | 20-35 |
-| AerDays | 通气天数 | days | 3-7 |
-| evapZ | 蒸发层厚度 | m | 0.10-0.15 |
-| fwcc | 地表覆盖对蒸发的影响系数 | - | 50-60 |
-| fwdc | 枯枝落叶对蒸发的影响系数 | - | 50-60 |
-
-#### 根系参数
-| 参数 | 描述 | 单位 | 典型范围 |
-|------|------|------|----------|
-| Zmin | 最小有效根深 | m | 0.20-0.30 |
-| Zmax | 最大有效根深 | m | 1.0-2.0 |
-| PexpZ | 根系扩展形状系数 | - | 1.2-1.5 |
-| SxTop | 上层土壤水分汲取系数 | - | 5-10 |
-| SxBot | 下层土壤水分汲取系数 | - | 0.4-0.8 |
-| rtx | 最大根系生长速率 | m/day | 0.010-0.015 |
-
-#### 胁迫参数
-| 参数 | 描述 | 单位 | 典型范围 |
-|------|------|------|----------|
-| Ks_st | 土壤盐分胁迫阈值 | dS/m | 2-3 |
-| Ks_ex | 土壤盐分胁迫形状系数 | %/(dS/m) | 10-15 |
-| Kst_exp | 气孔导度胁迫指数 | - | 3-5 |
-| anaer | 厌氧胁迫系数 | - | 0.01-0.02 |
-| polmn | 授粉最低温度 | °C | 8-10 |
-| polmx | 授粉最高温度 | °C | 35-40 |
-| stbio | 生物量胁迫系数 | - | 0.7-0.8 |
-
-### 参数敏感性分析说明
-
-敏感性分析结果的解读方法：
-
-1. EFAST方法结果解读：
-   - Si (主效应指数)：表示单个参数的直接影响
-   - STi (总效应指数)：包含参数与其他参数的交互作用
-   - 指数值范围：0-1，越大表示影响越显著
-
-2. Morris方法结果解读：
-   - μ* (修正平均值)：表示参数对输出的整体影响程度
-   - σ (标准差)：表示参数与其他参数的交互作用或非线性效应
-   - 通过μ*-σ图可视化参数重要性
-
-3. 结果可视化：
-   - 使用`Grafici_Paper.m`查看主要分析图
-   - 使用`Figure_mustar_sigma.m`查看Morris方法的μ*-σ散点图
-   - 根据实际分析结果对参数进行排序
-
-### 参数校准建议
-
-1. 校准原则：
-   - 优先校准敏感性分析结果中影响较大的参数
-   - 考虑参数之间的交互作用
-   - 结合实际观测数据进行校准
-
-2. 校准注意事项：
-   - 参数取值应在物理意义允许的范围内
-   - 考虑参数之间的相关性
-   - 建议使用实测数据进行验证
-   - 可能需要多次迭代优化
-
-## 执行流程 | Execution Process
-
-1. 前期准备：
-   - 配置AquaCrop插件路径
-   - 准备气象数据文件
-   - 设置土壤和作物参数
-
-2. EFAST方法执行：
-   ```matlab
-   % 1. 设置基本参数
-   fileinput.vs_method_options.EFAST.NsIni = 1250;
-   fileinput.vs_method_options.EFAST.Nrep = 5;
-   
-   % 2. 运行分析
-   [v_in_mat,v_Ns,v_w,v_in_mat_real,v_out_mat,vs_indices,CC_m] = EFAST(...);
-   
-   % 3. 结果可视化
-   Grafici_Paper;
-   ```
-
-3. Morris方法执行：
-   ```matlab
-   % 1. 设置基本参数
-   fileinput.vs_method_options.p = 8;
-   fileinput.vs_method_options.r = 10;
-   
-   % 2. 运行分析
-   [v_in_mat,v_in_mat_real,v_out_mat,vs_indices,CC_m] = Morris(...);
-   
-   % 3. 结果可视化
-   Figure_mustar_sigma;
-   ```
-
-## 输入输出说明 | Input/Output Description
-
-### 输入文件要求
-- 气象数据：daily_weather.txt
-- 土壤数据：soil_data.txt
-- 作物参数：crop_param.txt
-
-### 输出结果说明
-1. EFAST方法输出：
-   - 主效应指数（Si）
-   - 总效应指数（STi）
-   - 参数交互作用分析
-
-2. Morris方法输出：
-   - μ*（修正平均值）
-   - σ（标准差）
-   - 参数重要性排序
-
-## 实际应用案例 | Case Studies
-
-### 案例1：冬小麦生长模拟
-- 研究区域：华北平原
-- 关注参数：CDC, CGC, CCx
-- 主要发现：水分生产力对CCx最敏感
-
-### 案例2：玉米产量预测
-- 研究区域：东北平原
-- 关注参数：WP*, Kcb
-- 主要发现：产量对WP*最敏感
-
-## 常见问题 | FAQ
-
-1. Q: EFAST和Morris方法如何选择？
-   A: EFAST适合深入分析，Morris适合快速筛选。
-
-2. Q: 如何处理参数相关性？
-   A: 通过设置合理的参数范围和交互项分析。
-
-3. Q: 模拟结果不收敛怎么办？
-   A: 检查参数范围设置和增加样本量。
-``````
+## 10. 联系方式
+如有问题或建议，请联系项目维护者。
